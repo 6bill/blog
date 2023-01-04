@@ -1,0 +1,9 @@
+{
+  "name": "6bill/blog",
+  "require": {},
+  "autoload": {
+    "psr-4": {
+      "Blog\\": "src/"
+    }
+  }
+}
