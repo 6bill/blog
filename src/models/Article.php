@@ -8,6 +8,7 @@ class Article {
     private $Date;
     private $Photo;
     private $Texte;
+    private $Id_user;
 
     public function getId_article() {
         return $this->Id_article;
@@ -25,8 +26,35 @@ class Article {
         return $this->Date;
     }
 
-    public function getTexte() {
+    /**
+     * @return mixed
+     */
+    public function getTexte()
+    {
         return $this->Texte;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId_user()
+    {
+        return $this->Id_user;
+    }
+
+
+    //faux getter pour récupérer le pseudo du user qui a écrit l'article
+    public function getPseudoUser() {
+        $outilmanager= new UserManager();
+        return $outilmanager->getUserById($this->getId_user())->getPseudo();
+    }
+
+    /**
+     * @param mixed $Id_user
+     */
+    public function setIdUser($Id_user)
+    {
+        $this->Id_user = $Id_user;
     }
 
      public function setId_article(Int $Id_article) {
@@ -48,8 +76,4 @@ class Article {
     public function setTexte(String $Texte) {
         $this->Texte = $Texte;
     }
-
-
-
-    
 }

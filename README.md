@@ -13,25 +13,22 @@ Notre application aura la stucture suivante
         image/
         js/
     src/
-        Controllers/
+        controllers/
             ArticleController.php
             UserController.php           
-        Models/
+        models/
             User.php
             Article.php
-            Role.php
             UserManager.php
             ArticleManager.php
-            RoleManager.php
-        Views/
+        views/
             Article/
                 index.php
                 homepage.php
                 create.php
             Auth/
                 login.php
-                register.php
-            
+                register.php          
         Router.php
         
 ```
@@ -62,7 +59,7 @@ $ composer dump-autoload
 ```
 //créer la base blog qui se trouve dans le fichier src/config/blog.sql
 //executez  cd public
-//lancer php -S localhost:8000 dans le dossier public
+//lancer php -S localhost:8000
 
 ## Etape 3 - Le router
 Voici la liste des routes qui seront implémentées:
@@ -74,9 +71,9 @@ ROUTES EN GET
 - "/register, GET => page d'inscription
 - "/dashboard, GET => dashboard qui montre tous les articles 
 - "/dashboard/nouveau, GET => montre le formulaire de création d'un article
-- "/dashboard/{article}/delete GET => supprime l'article
 
 ROUTES EN POST
-- "/dashboard/nouveau, POST => crée l'article en base dde données
+- "/dashboard/nouveau, POST => crée l'article en base de données
 - "/login, POST =>  vérifie la connexion
 - "/register, POST =>  crée le nouveau user
+- "/dashboard/{article}/delete POST => supprime l'article

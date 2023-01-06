@@ -13,13 +13,13 @@ ob_start();
                         <div class="top">
                             <p><?php echo escape($article->getTitre()); ?>
                                 (posté le
-                                <?php echo escape($article->getDate()); ?> par ***** )</p>
+                                <?php echo escape($article->getDate()); ?> par <?php echo escape($article->getPseudoUser()); ?> )</p>
                             <p>
 
                             <form action="/dashboard/<?php echo escape($article->getId_article()); ?>/delete"
                                   method="post">
                                 <button class="button btn-danger" type="submit"
-                                        onclick="return confirm('Etes-vous sur de vouloir supprimer ce métier ?')">
+                                        onclick="return confirm('Etes-vous sur de vouloir supprimer cet article ?')">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="16" height="16"
                                          fill="currentColor">
                                         <!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
