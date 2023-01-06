@@ -42,7 +42,7 @@ class ArticleManager {
     }
 
     /** Récupération de l'article à partir de son id**/
-    public function getArticle($id)
+    public function getArticleById($id)
     {
         $stmt = $this->bdd->prepare('SELECT * FROM article WHERE Id_article = ?');
         $stmt->execute(array(
