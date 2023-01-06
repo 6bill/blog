@@ -71,9 +71,9 @@ ROUTES EN GET
 - "/register, GET => page d'inscription
 - "/dashboard, GET => dashboard qui montre tous les articles 
 - "/dashboard/nouveau, GET => montre le formulaire de création d'un article
-- "/dashboard/{article}/delete GET => supprime l'article
 
 ROUTES EN POST
 - "/dashboard/nouveau, POST => crée l'article en base de données
 - "/login, POST =>  vérifie la connexion
 - "/register, POST =>  crée le nouveau user
+- - "/dashboard/{article}/delete POST => supprime l'article
