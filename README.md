@@ -76,4 +76,4 @@ ROUTES EN POST
 - "/dashboard/nouveau, POST => crée l'article en base de données
 - "/login, POST =>  vérifie la connexion
 - "/register, POST =>  crée le nouveau user
-- - "/dashboard/{article}/delete POST => supprime l'article
+- "/dashboard/{article}/delete POST => supprime l'article
