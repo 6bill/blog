@@ -39,14 +39,13 @@ ob_start();
         <label for="role"><i class="fas fa-user-tie"></i></label>
         <select name="role">
         <?php
-        
-            foreach ($roles as $role) {
               $selected="";
               if (!empty(old("id_role"))) {
                 $selected="selected";
               }
-              echo "<option ".$selected." value='".$role->getId_role()."'>".escape($role->getLibelle_role())."</option>";
-            } 
+              echo "<option value='0'>Neutre</option>";
+              echo "<option value='1'>Admin</option>";
+
           ?>
         </select>
       </div>
@@ -60,8 +59,8 @@ ob_start();
 
 
 <script>
-var btnPass = document.getElementById("btnPassword");
-var inputPass = document.getElementById("inputPassword");
+let btnPass = document.getElementById("btnPassword");
+let inputPass = document.getElementById("inputPassword");
 btnPass.onclick = function() {
     if (inputPass.type === "password") {
         inputPass.type = "text";
@@ -70,8 +69,8 @@ btnPass.onclick = function() {
     }
 };
 
-var btnPassConf = document.getElementById("btnPasswordConfirm");
-var inputPassConf = document.getElementById("inputPasswordConfirm");
+let btnPassConf = document.getElementById("btnPasswordConfirm");
+let inputPassConf = document.getElementById("inputPasswordConfirm");
 btnPassConf.onclick = function() {
     if (inputPassConf.type === "password") {
         inputPassConf.type = "text";

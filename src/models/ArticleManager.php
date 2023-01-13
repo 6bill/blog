@@ -15,11 +15,12 @@ class ArticleManager {
     
     /** Enregistrement de l'article **/
     public function store() {
-        $stmt = $this->bdd->prepare("INSERT INTO article(Titre, Date, Photo, Texte ) VALUES (?, NOW(), ?, ?)");
+        $stmt = $this->bdd->prepare("INSERT INTO article(Titre, Date, Photo, Texte,Id_user ) VALUES (?, NOW(), ?, ?,?)");
         $retour=$stmt->execute(array(
             $_POST["name"],
             $_FILES["photo"]["name"],
-            $_POST["texte"]
+            $_POST["texte"],
+            $_SESSION["user"]["id"]
         ));
         return $retour;
     }
@@ -50,4 +51,5 @@ class ArticleManager {
         ));
         return $stmt->fetchAll(\PDO::FETCH_CLASS,"Blog\Models\Article");
     }
+
 }

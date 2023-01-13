@@ -1,6 +1,7 @@
 <?php
 
-namespace Blog\Models;
+namespace Blog\models;
+use Blog\models\User;
 
 /** Class UserManager **/
 class UserManager
@@ -21,7 +22,7 @@ class UserManager
     /** Récupération d'un user à partir de son id**/
     public function getUserById($id)
     {
-        $stmt = $this->bdd->prepare("SELECT * FROM User WHERE Id_user = ?");
+        $stmt = $this->bdd->prepare("SELECT * FROM user WHERE Id_user = ?");
         $stmt->execute(array(
             $id
         ));
@@ -33,18 +34,29 @@ class UserManager
     /** Récupération de tous les user avec leur rôle **/
     public function all()
     {
-        $stmt = $this->bdd->query('SELECT * FROM User INNER JOIN Role ON User.Id_role = Role.Id_role');
+        $stmt = $this->bdd->query('SELECT * FROM user INNER JOIN Role ON User.Id_role = Role.Id_role');
         return $stmt->fetchAll(\PDO::FETCH_CLASS, "Blog\Models\User");
     }
 
     /** Enregistrement du user **/
     public function store($password)
     {
-        $stmt = $this->bdd->prepare("INSERT INTO User(login, password, Id_role) VALUES (?, ?, ?)");
+        $stmt = $this->bdd->prepare("INSERT INTO User(pseudo, password, role) VALUES (?, ?, ?)");
         $stmt->execute(array(
             $_POST["username"],
             $password,
             $_POST["role"],
         ));
     }
+
+    /** Récupération de le user à partir de son id**/
+    public function getUserByPseudo($pseudo)
+    {
+        $stmt = $this->bdd->prepare('SELECT * FROM user WHERE pseudo = ?');
+        $stmt->execute(array(
+            $pseudo
+        ));
+        return $stmt->fetchAll(\PDO::FETCH_CLASS,"Blog\Models\User");
+    }
+
 }

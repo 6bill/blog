@@ -32,8 +32,8 @@ ob_start();
 </section>
 
 <script>
-var btnPass = document.getElementById("btnPassword");
-var inputPass = document.getElementById("inputPassword");
+let btnPass = document.getElementById("btnPassword");
+let inputPass = document.getElementById("inputPassword");
 btnPass.onclick = function() {
     if (inputPass.type === "password") {
         inputPass.type = "text";

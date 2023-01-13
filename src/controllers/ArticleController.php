@@ -20,6 +20,12 @@ class ArticleController
         require VIEWS . 'Article/homepage.php';
     }
 
+    /** HomePage **/
+    public function verify()
+    {
+        require VIEWS . 'Article/verify.php';
+    }
+
     /** Formulaire de création d'article **/
     public function create()
     {
@@ -41,7 +47,7 @@ class ArticleController
     {
         //suppression de l'image
         $photo = "";
-        $articles = $this->manager->getArticle($slug);
+        $articles = $this->manager->getArticleById($slug);
         foreach ($articles as $article) {
             $photo = $article->getPhoto();
         }

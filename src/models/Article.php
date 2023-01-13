@@ -73,7 +73,14 @@ class Article {
         $this->Photo = $Photo;
     }
 
-    public function setTexte(String $Texte) {
+    public function setTexte(String $Texte)
+    {
         $this->Texte = $Texte;
     }
+
+    public function getDateFormat(){
+        $date = date_create($this->getDate());
+        return date_format($date,"d/m/Y");
+    }
+
 }
