@@ -33,11 +33,17 @@ class ArticleManager {
             $id
         ));
     }
+    /** Suppression de l'article **/
+    public function check($id) {
+
+        $stmt = $this->bdd->prepare("UPDATE article SET statue = '1' WHERE Id_article = ?");
+        $stmt->execute(array( $id ));
+    }
 
     /** Récupération de tous les articles **/
     public function getAll()
     {
-        $stmt = $this->bdd->prepare('SELECT * FROM article');
+        $stmt = $this->bdd->prepare('SELECT * FROM article where statue = 1');
         $stmt->execute(array( ));
         return $stmt->fetchAll(\PDO::FETCH_CLASS,"Blog\Models\Article");
     }
@@ -49,6 +55,14 @@ class ArticleManager {
         $stmt->execute(array(
             $id
         ));
+        return $stmt->fetchAll(\PDO::FETCH_CLASS,"Blog\Models\Article");
+    }
+
+    /** Récupération de l'article à partir de son id**/
+    public function getStatue0()
+    {
+        $stmt = $this->bdd->prepare('SELECT * FROM article WHERE statue = 0');
+        $stmt->execute(array( ));
         return $stmt->fetchAll(\PDO::FETCH_CLASS,"Blog\Models\Article");
     }
 

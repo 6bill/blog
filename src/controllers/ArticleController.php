@@ -23,6 +23,8 @@ class ArticleController
     /** HomePage **/
     public function verify()
     {
+        $articles = $this->manager->getStatue0();
+
         require VIEWS . 'Article/verify.php';
     }
 
@@ -57,6 +59,12 @@ class ArticleController
         //suppression de l'article
         $this->manager->delete($slug);
         header("Location: /dashboard");
+    }
+
+    public function check($slug)
+    {
+        $this->manager->check($slug);
+        header("Location: /verify");
     }
 
     /** Affichage des articles **/
