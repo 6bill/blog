@@ -20,28 +20,45 @@ class ArticleController
         require VIEWS . 'Article/homepage.php';
     }
 
-    /** HomePage **/
-    public function verify()
-    {
-        $articles = $this->manager->getStatue0();
-
-        require VIEWS . 'Article/verify.php';
-    }
-
     /** Formulaire de création d'article **/
     public function create()
     {
-        require VIEWS . 'Article/create.php';
+        if (isset($_SESSION["user"])) {
+
+            require VIEWS . 'Article/create.php';
+        }else{
+            header("Location: /");
+        }
+    }
+
+    /** Formulaire de modification d'article **/
+    public function modification()
+    {
+            require VIEWS . 'Article/modification.php';
     }
 
     /** Enregistrement de l'article **/
     public function store()
     {
-        $this->manager->store();
-        if (isset($_FILES["photo"])) {
-            move_uploaded_file($_FILES["photo"]["tmp_name"], "image/" . $_FILES["photo"]["name"]);
+        if (isset($_SESSION["user"])) {
+            $this->manager->store();
+            if (isset($_FILES["photo"])) {
+                move_uploaded_file($_FILES["photo"]["tmp_name"], "image/" . $_FILES["photo"]["name"]);
+            }
+            header("Location: /dashboard");
         }
-        header("Location: /dashboard");
+    }
+
+    /** Enregistrement de l'article **/
+    public function storeCommentaire()
+    {
+        if (isset($_SESSION["user"])) {
+            $this->manager->storeCommentaire();
+            if (isset($_FILES["photo"])) {
+                move_uploaded_file($_FILES["photo"]["tmp_name"], "image/" . $_FILES["photo"]["name"]);
+            }
+            header("Location: /dashboard");
+        }
     }
 
     /** Suppression de l'article **/
@@ -49,7 +66,7 @@ class ArticleController
     {
         //suppression de l'image
         $photo = "";
-        $articles = $this->manager->getArticleById($slug);
+        $articles = $this->manager->getArticle($slug);
         foreach ($articles as $article) {
             $photo = $article->getPhoto();
         }
@@ -61,11 +78,7 @@ class ArticleController
         header("Location: /dashboard");
     }
 
-    public function check($slug)
-    {
-        $this->manager->check($slug);
-        header("Location: /verify");
-    }
+
 
     /** Affichage des articles **/
     public function showAll()

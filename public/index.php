@@ -15,10 +15,13 @@ $router->get('/dashboard/nouveau/', "ArticleController@create");
 $router->get('/login', "UserController@index");
 $router->get('/register', "UserController@showRegister");
 $router->get('/logout', "UserController@logout");
+$router->get('/dashboard/:article/modification/', "ArticleController@modification");
+
 
 
 
 $router->post('/dashboard/:article/delete/', "ArticleController@delete");
+$router->post('/dashboard/:article/commentaire/', "ArticleController@storeCommentaire");
 $router->post('/dashboard/nouveau/', "ArticleController@store");
 $router->post('/login', "UserController@login");
 $router->post('/register', "UserController@register");

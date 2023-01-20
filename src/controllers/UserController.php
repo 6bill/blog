@@ -50,12 +50,6 @@ class UserController
         if (empty($res)) {
             $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
             $this->manager->store($password);
-
-            $_SESSION["user"] = [
-                "id" => $this->manager->getBdd()->lastInsertId(),
-                "pseudo" => $_POST["pseudo"],
-                "role" => $_POST["role"]
-            ];
             header("Location: /");
         } else {
             $_SESSION["error"]['pseudo'] = "Le pseudo choisi est déjà utilisé !";

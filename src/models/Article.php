@@ -1,86 +1,96 @@
 <?php
+
 namespace Blog\models;
 
-/** Class Article **/
-class Article {
-    private $Id_article;
-    private $Titre;
-    private $Date;
-    private $Photo;
-    private $Texte;
-    private $Id_user;
+use Blog\models\User;
 
-    public function getId_article() {
+
+/** Class Article **/
+class Article
+{
+    protected $Id_article;
+    protected $Titre;
+    protected $Date;
+    protected $Photo;
+    protected $Texte;
+    protected $Id_user;
+
+    public function getId_article()
+    {
         return $this->Id_article;
     }
 
-    public function getTitre() {
+    public function getTitre()
+    {
         return $this->Titre;
     }
 
-    public function getPhoto() {
+    public function getPhoto()
+    {
         return $this->Photo;
     }
 
-    public function getDate() {
+    public function getDate()
+    {
         return $this->Date;
     }
 
-    /**
-     * @return mixed
-     */
     public function getTexte()
     {
         return $this->Texte;
     }
 
-    /**
-     * @return mixed
-     */
     public function getId_user()
     {
         return $this->Id_user;
     }
 
-
-    //faux getter pour récupérer le pseudo du user qui a écrit l'article
-    public function getPseudoUser() {
-        $outilmanager= new UserManager();
-        return $outilmanager->getUserById($this->getId_user())->getPseudo();
-    }
-
-    /**
-     * @param mixed $Id_user
-     */
-    public function setIdUser($Id_user)
+    public function setId_article(int $Id_article)
     {
-        $this->Id_user = $Id_user;
-    }
-
-     public function setId_article(Int $Id_article) {
         $this->Id_article = $Id_article;
     }
 
-    public function setTitre(string $Titre) {
+    public function setTitre(string $Titre)
+    {
         $this->Titre = $Titre;
     }
 
-    public function setDate(String $Date) {
+    public function setDate(string $Date)
+    {
         $this->Date = $Date;
     }
 
-    public function setPhoto(String $Photo) {
+    public function setPhoto(string $Photo)
+    {
         $this->Photo = $Photo;
     }
 
-    public function setTexte(String $Texte)
+    public function setTexte(string $Texte)
     {
         $this->Texte = $Texte;
     }
 
-    public function getDateFormat(){
-        $date = date_create($this->getDate());
-        return date_format($date,"d/m/Y");
+    public function setId_user(int $Id_user)
+    {
+        $this->Id_user = $Id_user;
+
     }
 
+    public function getPseudoUser()
+    {
+        $userManagement = new UserManager();
+        $user = $userManagement->getUserbyId($this->getId_user());
+
+        return $user->getPseudo();
+    }
+
+    //faux getter pour récupérer les commentaires de l'article
+    public function getCommentaires()
+    {  //on appelle la méthode "getArticleCommentaires" de l' ArticleManager
+        $ArticleManagement = new ArticleManager();
+        $commentaires = $ArticleManagement->getArticleCommentaires($this->getId_article());
+        //on récupère un array list des commentaires
+        //ou un array list vide si l'article n'a pas de commentaires
+        return $commentaires;
+    }
 }
