@@ -19,7 +19,7 @@ class ArticleManager
     /** Enregistrement de l'article **/
     public function store()
     {
-        $stmt = $this->bdd->prepare("INSERT INTO article(Titre, Date, Photo, Texte, Id_user ) VALUES (?, NOW(), ?, ?, ?)");
+        $stmt = $this->bdd->prepare("INSERT INTO article(Titre, Date, Photo, Texte, Id_user) VALUES (?, NOW(), ?, ?, ?)");
         $retour = $stmt->execute(array(
             $_POST["name"],
             $_FILES["photo"]["name"],
@@ -46,14 +46,34 @@ class ArticleManager
         ));
         return $retour;
     }
-
+    public function checkACT(){
+        $stmt = $this->bdd->prepare('UPDATE article SET statue = 1 WHERE Id_article= ?');
+        $stmt->execute(array(
+            $_POST['IDARTICLE']
+        ));
+        return $stmt->fetchAll(\PDO::FETCH_CLASS,"Blog\Models\Article");
+    }
 
     /** Récupération de tous les articles **/
     public function getAll()
     {
-        $stmt = $this->bdd->prepare('SELECT * FROM article WHERE IdArticleCommente IS NULL');
+        $stmt = $this->bdd->prepare('SELECT * FROM article where statue = 1');
         $stmt->execute(array());
-        return $stmt->fetchAll(\PDO::FETCH_CLASS, "Blog\Models\Article");
+        return $stmt->fetchAll(\PDO::FETCH_CLASS,"Blog\Models\Article");
+    }
+
+    public function getOneArticle()
+    {
+        $stmt = $this->bdd->prepare('SELECT * FROM article where statue = 1 AND Id_article = ?');
+        $stmt->execute(array($_POST['IDARTICLE']));
+        return $stmt->fetchAll(\PDO::FETCH_CLASS,"Blog\Models\Article");
+    }
+
+    public function getArticleByPseudo()
+    {
+        $stmt = $this->bdd->prepare('SELECT * FROM `article` WHERE id_user = ?;');
+        $stmt->execute(array($_POST['IDPSEUDO']));
+        return $stmt->fetchAll(\PDO::FETCH_CLASS,"Blog\Models\Article");
     }
 
     /** Récupération de l'article à partir de son id**/
@@ -85,5 +105,40 @@ class ArticleManager
         ));
     }
 
+    function updateArticle()
+    {
+        //ON UTILISE LA METHODE prepare() de PDO POUR FAIRE UNE REQUETE PARAMETREE
+        $stmt = $this->bdd->prepare("UPDATE article SET Titre=?, Photo=?, Texte=? WHERE id_article=?");
+        $stmt->execute(array(
+            $_POST['Titre'],
+            $_POST['image'],
+            $_POST['Texte'],
+            $_POST['IDARTICLE']
+        ));
+    }
+
+    /** Récupération de l'article à partir de son id**/
+    public function getStatue0()
+    {
+        $stmt = $this->bdd->prepare('SELECT * FROM article WHERE statue = 0');
+        $stmt->execute(array( ));
+        return $stmt->fetchAll(\PDO::FETCH_CLASS,"Blog\Models\Article");
+    }
+
+    /** Suppression de l'article **/
+    public function check($id) {
+        $stmt = $this->bdd->prepare("UPDATE article SET statue = '1' WHERE Id_article = ?");
+        $stmt->execute(array( $id ));
+    }
+
+    public function getArticleByWords(){
+        $stmt = $this->bdd->prepare("SELECT * FROM article WHERE Titre LIKE ? AND IdArticleCommente IS NULL ");
+        $stmt->execute(array(
+            '%' . $_POST["recherche"] .'%'
+        ));
+
+        return $stmt->fetchAll(\PDO::FETCH_CLASS,"Blog\Models\Article");
+
+    }
 
 }

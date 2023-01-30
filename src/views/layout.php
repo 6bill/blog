@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>— Blog —</title>
-    <script src="https://kit.fontawesome.com/63e51d0dbe.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
@@ -71,12 +70,28 @@ if (isset($_SESSION["user"])) {
             echo "<p>Bonjour a vous - </p>" . $_SESSION['user']['pseudo'];
         }
         ?>
+        <div class="wrap">
+            <div class="search">
+                <input type="search" id="searchByWords" class="searchTerm" placeholder="Recherche un article">
+             </div>
+            <div class="resultByWords"></div>
+        </div>
+
+        <div class="wrap2">
+            <div class="search">
+                <input type="search" id="searchByPseudo" class="searchTerm" placeholder="Recherche une personne">
+             </div>
+            <div class="resultByPseudo"></div>
+        </div>
     </nav>
 </header>
 
 <main>
-    <?php echo $content; ?>
+    <?php echo $content;?>
 </main>
+<script src="https://kit.fontawesome.com/63e51d0dbe.js" crossorigin="anonymous"></script>
+<script  src="../js/jquery.js"></script>
+<script type="text/javascript" src="../js/search.js"></script>
 
 </body>
 </html>

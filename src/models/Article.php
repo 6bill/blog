@@ -93,4 +93,9 @@ class Article
         //ou un array list vide si l'article n'a pas de commentaires
         return $commentaires;
     }
+
+    public function getDateFormat(){
+        $date = date_create($this->getDate());
+        return date_format($date,"d/m/Y");
+    }
 }
