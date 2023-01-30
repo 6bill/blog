@@ -1,18 +1,18 @@
 <?php
 ob_start();
 ?>
-
+    <h1><i class="fas fa-solid fa-user logoPage"></i> Création d'un utilisateur :</h1>
 <section class="formRegister">
-  <h1>S'inscrire</h1>
+    <h2>Inscription</h2>
   <div class="separateur"></div>
-  <form action="/register/" method="post">
+  <form action="/register" method="post">
 
     <div class="blockInput">
       <div class="labelInput">
-        <label for="username"><i class="fas fa-user-tie"></i></label>
-        <input type="text" name="username" value="<?php echo old("username");?>" placeholder="login">
+        <label for="pseudo"><i class="fas fa-user-tie"></i></label>
+        <input type="text" name="pseudo" value="<?php echo old("pseudo");?>" placeholder="pseudo">
       </div>
-      <span class="error"><?php echo error("username");?></span>
+      <span class="error"><?php echo error("pseudo");?></span>
     </div>
 
     <div class="blockInput">
@@ -37,22 +37,14 @@ ob_start();
     <div class="blockInput">
       <div class="labelInput">
         <label for="role"><i class="fas fa-user-tie"></i></label>
-        <select name="role">
-        <?php
-        
-            foreach ($roles as $role) {
-              $selected="";
-              if (!empty(old("id_role"))) {
-                $selected="selected";
-              }
-              echo "<option ".$selected." value='".$role->getId_role()."'>".escape($role->getLibelle_role())."</option>";
-            } 
-          ?>
+        <select name="role" id="role">
+            <option value="user">user</option>
+            <option value="admin">admin</option>
         </select>
       </div>
     </div>
 
-    <button type="submit" name="button">S'inscrire</button>
+    <button type="submit" name="button">Créer l'utilisateur</button>
   </form>
 
   

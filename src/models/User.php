@@ -1,7 +1,6 @@
 <?php
 
-namespace Blog\Models;
-
+namespace Blog\models;
 
 /** Class User **/
 class User
@@ -10,6 +9,7 @@ class User
     private $Id_user;
     private $pseudo;
     private $password;
+    private $role;
 
     public function getId_user()
     {
@@ -25,7 +25,17 @@ class User
     {
         return $this->password;
     }
-
+    public function getRole(): string
+    {
+        return $this->role;
+    }
+    /**
+     * @param string $role
+     */
+    public function setRole(string $role): void
+    {
+        $this->role = $role;
+    }
 
     public function setPseudo(string $pseudo)
     {
@@ -43,4 +53,3 @@ class User
     }
 
 }
-

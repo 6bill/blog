@@ -3,23 +3,18 @@ ob_start();
 ?>
 
 <section class="create">
-    <h1><i class="fas fa-list-alt"></i> Création d'un article :</h1>
+    <h1><i class="fas fa-plus logoPage"></i> Création d'un article :</h1>
     <div>
         <div class="list">
             <div class="top">
-                <p>Ajouter un article</p>                
+                <p>Ajouter un article</p>
             </div>
             <div class="separateur"></div>
             <div class="bottom">
                 <form action="/dashboard/nouveau" method="post" enctype='multipart/form-data'>
                     <input type="text" name="name" value="<?php echo old("name");?>" placeholder="Titre de l'article">
-
-
-
-
-
                     <p>
-                    Photo: <input type="file" name="photo" >
+                    Photo: <input type="file" name="photo">
                     </p>
                     <textarea name="texte" rows="8" cols="40" placeholder="Commentaire de l'article"><?php echo old("texte");?></textarea>
                    <br>

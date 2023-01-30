@@ -1,6 +1,7 @@
 <?php
 
-namespace Blog\Models;
+namespace Blog\models;
+
 
 /** Class UserManager **/
 class UserManager
@@ -25,10 +26,17 @@ class UserManager
         $stmt->execute(array(
             $id
         ));
-        $stmt->setFetchMode(\PDO::FETCH_CLASS, "Blog\Models\User");
-        return $stmt->fetch();
+        return $stmt->fetchAll(\PDO::FETCH_CLASS, "Blog\Models\User");
     }
 
+    public function getUserByPseudo($pseudo)
+    {
+        $stmt = $this->bdd->prepare("SELECT * FROM User WHERE pseudo = ?");
+        $stmt->execute(array(
+            $pseudo
+        ));
+        return $stmt->fetchAll(\PDO::FETCH_CLASS, "Blog\Models\User");
+    }
 
     /** Récupération de tous les user avec leur rôle **/
     public function all()
@@ -37,14 +45,21 @@ class UserManager
         return $stmt->fetchAll(\PDO::FETCH_CLASS, "Blog\Models\User");
     }
 
-    /** Enregistrement du user **/
+    /** Enregistrement du user. **/
     public function store($password)
     {
-        $stmt = $this->bdd->prepare("INSERT INTO User(login, password, Id_role) VALUES (?, ?, ?)");
+        $stmt = $this->bdd->prepare("INSERT INTO User(pseudo, password, role) VALUES (?, ?, ?)");
         $stmt->execute(array(
-            $_POST["username"],
+            $_POST["pseudo"],
             $password,
             $_POST["role"],
         ));
+    }
+    public function getPseudoByWords(){
+        $stmt = $this->bdd->prepare('SELECT * FROM User WHERE pseudo = ?');
+        $stmt->execute(array(
+            "%" . $_POST['recherche'] . "%"
+        ));
+        return $stmt->fetchAll(\PDO::FETCH_CLASS, "Blog\Models\Commentaire");
     }
 }

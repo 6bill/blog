@@ -1,60 +1,45 @@
 <?php
 
-namespace Blog\Controllers;
+namespace Blog\controllers;
 
-use Blog\Models\UserManager;
-use Blog\Models\RoleManager;
-use Blog\Validator;
+use Blog\models\UserManager;
 
 /** Class UserController **/
-class UserController {
+class UserController
+{
     private $manager;
-    private $role_manager;
-    private $validator;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->manager = new UserManager();
-        $this->role_manager = new RoleManager();
-        $this->validator = new Validator();
     }
 
     /** Affichage de la page d'authentification **/
-    public function showLogin() {
+    public function showLogin()
+    {
         require VIEWS . 'Auth/login.php';
     }
 
     /** Affichage de la page register **/
-    public function showRegister() {
-        //récupération des roles
-        $roles = $this->role_manager->getAll();        
+    public function showRegister()
+    {
         require VIEWS . 'Auth/register.php';
     }
 
     /** logout **/
     public function logout()
     {
-        
-        session_destroy();
-        header('Location: /login/');
+        $_SESSION = array();
+        unset($_SESSION);
+        header('Location: /');
     }
-
-    /** insertion d'un user **/
     public function register() {
-        $this->validator->validate([
-            "pseudo"=>["required", "min:3", "alphaNum"],
-            "password"=>["required", "min:6", "alphaNum", "confirm"],
-            "passwordConfirm"=>["required", "min:6", "alphaNum"]
-        ]);
-        $_SESSION['old'] = $_POST;
 
-        if (!$this->validator->errors()) {
-            /** vérifie si le pseudo existe déjà **/
-            $res = $this->manager->find($_POST["pseudo"]);
-
+        $res = $this->manager->getUserbyPseudo($_POST["pseudo"]);
+        if ((!empty($_POST['pseudo']) && !empty($_POST['password'])) && ($_POST['password'] == $_POST['passwordConfirm'])) {
             if (empty($res)) {
                 $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
                 $this->manager->store($password);
-
                 $_SESSION["user"] = [
                     "id" => $this->manager->getBdd()->lastInsertId(),
                     "pseudo" => $_POST["pseudo"],
@@ -62,39 +47,57 @@ class UserController {
                 ];
                 header("Location: /");
             } else {
-                $_SESSION["error"]['pseudo'] = "Le pseudo choisi est déjà utilisé !";
+                $_SESSION["error"]['pseudo'] = "Le pseudo est déjà pris !";
                 header("Location: /register");
             }
-        } else {
+        } if (empty($_POST['pseudo'])){
+            $_SESSION["error"]['pseudo'] = " Choisissez un pseudo !";
+            header("Location: /register");
+        } if (empty($_POST['password'])){
+            $_SESSION["error"]['password'] = "Choisissez un mot de passe !";
+            header("Location: /register");
+        } if ($_POST['password'] != $_POST['passwordConfirm']) {
+            $_SESSION["error"]['passwordConfirm'] = "Les mots de passes doivent êtres différents !";
             header("Location: /register");
         }
     }
-
-    /** vérification de l'autentification **/
-    public function login() {
-        $this->validator->validate([
-            "pseudo"=>["required", "min:3", "max:9", "alphaNum"],
-            "password"=>["required", "min:4", "alphaNum"]
-        ]);
-
+    public function searchByWordsPseudo()
+    {
+        $output = "";
+        $users = $this->manager->getPseudoByWords();
+        if ($users) {
+            foreach ($users as $user) {
+                $output .= "<a href='/user/" . $user->getId_user() . "'>" . $user->getPseudo() . "</a><br>";
+            }
+            echo $output;
+        }
+    }
+    /** Vérification de l'authentification **/
+    public function login()
+    {
         $_SESSION['old'] = $_POST;
-
-        if (!$this->validator->errors()) {
-            $res = $this->manager->getUserById());
-
-            if ($res && password_verify($_POST['password'], $res->getPassword())) {
+        //on recherche si le pseudo existe
+        $user = $this->manager->getUserbyPseudo($_POST["pseudo"])[0];
+        //si l'user existe.
+        if ($user != null) {
+            //on vérifie si le mot de passe est bon
+            if ($_POST['password'] == $user->getPassword()) {
                 $_SESSION["user"] = [
-                    "id" => $res->getId_user(),
-                    "pseudo" => $res->getPseudo(),
-                    "role" => $res->getId_role()
+                    "id" => $user->getId_user(),
+                    "pseudo" => $user->getPseudo(),
+                    "role" => $user->getRole()
                 ];
-               
                 header("Location: /");
-            } else {
+            }
+            //le mot de passe est erroné.
+            else {
                 $_SESSION["error"]['message'] = "Une erreur sur les identifiants";
                 header("Location: /login");
             }
-        } else {
+        }
+        //le pseudo n'existe pas dans la bdd donc l'user est null
+        else {
+            $_SESSION["error"]['message'] = "Une erreur sur les identifiants";
             header("Location: /login");
         }
     }

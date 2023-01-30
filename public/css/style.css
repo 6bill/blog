@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
 * {
     margin: 0;
     box-sizing: border-box;
@@ -8,28 +9,22 @@ html {
 }
 
 body {
-    height: 100vh;
     width: 100%;
     margin: 0;
     background-color: rgba(170, 172, 175, 0.6);
-    display: flex;
-    flex-direction: row;
 }
 
 header {
     width: 100%;
-   
-    position: fixed;
+    position: sticky;
+    top: 0;
 }
 
 nav {
-   
     background-color: rgb(38, 15, 68);
     color: white;
     display: flex;
-    
     align-items: center;
-    
 }
 
 nav a {
@@ -37,10 +32,31 @@ nav a {
     color: white;
 }
 
-nav>* {
-   
+nav>*:not(#welcome, .searchArticle, .searchPseudo, .resultByWordsArticle, .resultByWordsPseudo, #search) {
+    width: 6%;
 }
-
+.searchArticle, .searchPseudo{
+    width: 40%;
+}
+#search{
+    width: 50%;
+    display: flex;
+    justify-content: space-evenly;
+    margin: auto;
+}
+.resultByWordsArticle{
+    display: flex;
+    justify-content: space-evenly;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 60%;
+}
+.resultByWordsArticle a{
+    margin: auto;
+}
 nav a.logo {
     border-radius: 100%;
     display: flex;
@@ -49,28 +65,44 @@ nav a.logo {
     background-color: black;
     padding: 5px;
     width: 60px;
-    height: 60px;
+    height: 90px;
     margin-top: 10px;
     margin-bottom: 20px;
 }
-
+#logout{
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+#logout img{
+    width: 30px;
+}
+#logout .hidden{
+    color: white;
+}
+form[action="logout/"]{
+    display: flex;
+    justify-content: center;
+}
 nav .icon {
     width: 100%;
     text-align: center;
-    margin-bottom: 2px;
 }
-
+.hoverLink i{
+    font-size: 20px;
+}
 nav .hidden {
-    visibility: hidden;
+    display: none;
     opacity: 0;
     background-color: black;
     padding: 4px 7px;
     border-radius: 10px;
     transition: all .5s ease;
+    text-align: center;
 }
 
 nav .hoverLink:hover .hidden {
-    visibility: visible;
+    display: block;
     opacity: 1;
     transition: all .5s ease;
 }
@@ -78,16 +110,51 @@ nav .hoverLink:hover .hidden {
 main {
     flex: 1;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: 90px;
+    flex-direction: column;
 }
 
 /* CSS Form Register */
 .sup {
     color: red;
 }
+.logoPage{
+    width: 50px;
+    font-size: 40px;
+    margin: 10px;
+}
+#validation, #delete{
+    width: 85%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+#validation select {
+    width: 8rem;
+}
 
+#submitDelete{
+    font-size: 20px;
+    width: 85%;
+    color: white;
+    padding: 15px;
+    margin: 5px auto 10px;
+    display: block;
+    background-color: red;
+    border: 1px solid white;
+    cursor: pointer;
+}
+#submit{
+    font-size: 20px;
+    width: 85%;
+    color: white;
+    padding: 15px;
+    margin: 5px auto;
+    display: block;
+    background-color: green;
+    border: 1px solid white;
+    cursor: pointer;
+}
 .formLogin {
     display: flex;
     flex-direction: column;
@@ -95,6 +162,7 @@ main {
     background-color: #013a6b;
     color: white;
     border-radius: 15px;
+    margin: auto;
 }
 
 .formLogin h1 {
@@ -102,7 +170,7 @@ main {
     text-align: center;
 }
 
-.formLogin .separateur {
+.formLogin .separator {
     border-top: 4px solid white;
     border-radius: 100%;
     width: 85%;
@@ -244,6 +312,7 @@ main {
     background-color: #013a6b;
     color: white;
     border-radius: 15px;
+    margin: auto;
 }
 
 .formRegister h1 {
@@ -251,7 +320,7 @@ main {
     text-align: center;
 }
 
-.formRegister .separateur {
+.formRegister .separator {
     border-top: 4px solid white;
     border-radius: 100%;
     width: 85%;
@@ -389,7 +458,6 @@ main {
 
 /* CSS page Article */
 section.dashboard {
-    padding: 50px 50px;
     flex: 1;
     height: 100%;
 }
@@ -405,12 +473,20 @@ section.dashboard .topDashBoard h1 {
     color: #052659ff;
     font-size: 40px;
 }
-
+a{
+    text-decoration: none;
+}
 section.dashboard .topDashBoard a {
     text-decoration: none;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+section.dashboard .cardComment {
+    width: 500px;
+    background-color: #bbf6ec;
+    border-radius: 15px;
+
 }
 
 section.dashboard .topDashBoard a i {
@@ -446,7 +522,6 @@ section.dashboard .topDashBoard .buttonAdd:hover {
 }
 
 section.dashboard .blockAllList {
-    margin-top: 35px;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -468,8 +543,8 @@ section.dashboard .card {
 section.dashboard .card .top {
     padding: 15px 25px 5px 25px;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
 }
 
 section.dashboard .card .top>* {
@@ -481,7 +556,7 @@ section.dashboard .card .top i {
     font-size: 20px;
 }
 
-section.dashboard .card .separateur {
+section.dashboard .card .separator {
     border-top: 1px solid white;
 }
 
@@ -500,7 +575,14 @@ section.dashboard .card .bottom p {
 section.dashboard .card .bottom .check {
     text-decoration: line-through;
 }
-
+.top:nth-of-type(2), .top:first-of-type{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.top:last-of-type{
+    text-align: justify;
+}
 #meteo {
     width:250px;
     margin-left: auto; 
@@ -523,7 +605,7 @@ section.homepage>* {
 
 section.homepage h1 {
     font-size: 50px;
-    margin-bottom: 25px;
+    margin-top: 5rem;
 }
 
 section.homepage p {
@@ -640,7 +722,7 @@ section.homepage p {
     cursor: pointer;
 }
 
-.viewList>.separateur {
+.viewList>.separator {
     border-top: 4px solid white;
     width: 100%;
 }
@@ -742,7 +824,12 @@ section.homepage p {
     border-radius: 100%;
     transition: all .5s ease;
 }
-
+#new{
+    height: 40px;
+}
+#bell{
+    width: 30px;
+}
 .viewList .btnCheckTrue i {
     font-size: 20px;
     color: green;
@@ -901,7 +988,6 @@ section.homepage p {
 
 /* CSS create */
 section.create {
-    padding: 50px 50px;
     flex: 1;
     height: 100%;
     display: flex;
@@ -910,81 +996,132 @@ section.create {
 
 section.create h1 {
     font-size: 35px;
-}
-
-section.create>div {
     display: flex;
     align-items: center;
-    justify-content: center;
-    flex: 1;
+}
+.search {
+    width: 100% !important;
+    position: absolute;
+    display: flex;
+    align-items: center;
+}
+
+.searchTerm {
+    width: 100%;
+    border: 3px solid #00B4CC;
+    padding: 5px;
+    border-radius: 5px;
+    outline: none;
+    color: #9DBFAF;
+    margin-right: 15px;
+}
+
+.searchTerm:focus{
+    color: #00B4CC;
+}
+
+.searchButton {
+    width: 40px;
+    height: 36px;
+    border: 1px solid #00B4CC;
+    background: #00B4CC;
+    text-align: center;
+    color: #fff;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+/*Resize the wrap to see the search bar change!*/
+
+section.create>div {
+display: flex;
+align-items: center;
+justify-content: center;
+flex: 1;
 }
 
 section.create .list {
-    min-width: 40%;
-    height: 70%;
-    border-radius: 15px;
-    background-color: #013a6b;
-    display: flex;
-    flex-direction: column;
+min-width: 40%;
+height: 70%;
+border-radius: 15px;
+background-color: #013a6b;
+display: flex;
+flex-direction: column;
 }
 
 section.create .list .top {
-    width: 100%;
-    padding: 20px 20px 10px 20px;
-    color:white;
+width: 100%;
+padding: 20px 20px 10px 20px;
+color:white;
 }
 
-
+section.dashboard h1{
+    font-size: 35px;
+    display: flex;
+    align-items: center;
+}
 
 section.create form input {
-    height: 30px;
-    background-color: transparent;
-    border: none;
-    color: white;
-    flex: 1;
-    margin-right: 10px;
+height: 30px;
+background-color: transparent;
+border: none;
+color: white;
+flex: 1;
+margin-right: 10px;
 }
 
 section.create form input::placeholder {
-    color: white;
+color: white;
 }
 
 section.create form button {
-    padding: 10px 10px;
-    background-color: transparent;
-    border: none;
-    color: white;
-    border-radius: 100%;
-    cursor: pointer;
-    transition: background .5s ease;
+padding: 10px 10px;
+background-color: transparent;
+border: none;
+color: white;
+border-radius: 100%;
+cursor: pointer;
+transition: background .5s ease;
 }
 
 section.create form button:hover {
-    background-color: #052659ff;
-    transition: background .5s ease;
+background-color: #052659ff;
+transition: background .5s ease;
 }
 
 section.create .list .top .error,section.create .list .bottom .error {
-    color: red;
+color: red;
 }
 
-section.create .list .separateur {
-    border-top: 4px solid white;
-    width: 100%;
+section.create .list .separator {
+border-top: 4px solid white;
+width: 100%;
 }
 
 section.create .list .bottom {
-    width: 100%;
-    padding: 20px 20px 10px 20px;
-    flex-grow: 1;
-    color:white;
+width: 100%;
+padding: 20px 20px 10px 20px;
+flex-grow: 1;
+color:white;
 }
 
-.top img {
-    width:400px;    
+.top img:not(#imgEdit) {
+width:400px;
 }
-
-
+#divEdit{
+display: flex;
+justify-content: space-between;
+background-color: #E5E5E5;
+color: black;
+border: 1px solid black;
+padding: 5px;
+margin: 5px;
+align-items: center;
+}
+#imgEdit{
+width: 20px;
+}
 /* CSS page 404 */
 
 section.error {
@@ -999,7 +1136,9 @@ section.error h1 {
 section.error a {
     color: #052659ff;
 }
-
+.cardComment img{
+    width: 200px;
+}
 
 @media screen and (max-width: 765px) {
     body {
