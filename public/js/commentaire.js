@@ -1,8 +1,10 @@
 // On attend le chargement du document
 window.onload = () => {
     // On  met un écouteur sur l'évènementt click du bouton pour poster le commentaire
-    let valid = document.querySelector("#postCommentaire")
-    valid.addEventListener("click", ajoutCommentaire)
+    let valid = document.querySelectorAll(".postCommentaire")
+    for (let i = 0; i <= valid.length; i++){
+        valid[i].addEventListener("click", ajoutCommentaire)
+    }
 }
 
 
@@ -12,15 +14,17 @@ window.onload = () => {
  * à l'ArticleManager qui va insérer les données dans la bdd */
 function ajoutCommentaire() {
     // On récupère le commentaire
-    let commentaire = document.querySelector("#texteCommentaire").value
-    let IdArticleCommente = document.querySelector("#IdArticleCommente").value
+
+        let commentaire = document.querySelector("#texteCommentaire")
+        let IdArticleCommente = document.querySelector("#IdArticleCommente")
 
     // On vérifie si le commentaire n'est pas vide
+    console.log(commentaire);
     if (commentaire !== "") {
         // On crée un objet JS
         let donnees = {}
-        donnees["commentaire"] = commentaire
-        donnees["IdArticleCommente"] = IdArticleCommente
+            donnees["commentaire"] = commentaire
+            donnees["IdArticleCommente"] = IdArticleCommente
 
         // On convertit les données en JSON
         let donneesJson = JSON.stringify(donnees)
@@ -39,7 +43,8 @@ function ajoutCommentaire() {
                     document.querySelector("#texteCommentaire").value = ""
                     let divcommentaires = document.querySelector("#divcommentaires")
                     // On ajoute le contenu avant le contenu actuel de discussion
-                    divcommentaires.innerHTML = this.response
+                        divcommentaires.innerHTML = this.response
+
                 } else {
                     // On gère les erreurs
                     let erreur = JSON.parse(this.response)
@@ -47,7 +52,6 @@ function ajoutCommentaire() {
                 }
             }
         }
-
         // On ouvre la requête
         xmlhttp.open("POST", "/postCommentaire/")
         // On envoie la requête en incluant les données

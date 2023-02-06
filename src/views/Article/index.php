@@ -96,7 +96,7 @@ ob_start();
                             <input type="hidden" value="<?php echo escape($article->getId_article()); ?>" id="IdArticleCommente">
                             <textarea name="texte" rows="2" cols="40" placeholder="Commentaire de l'article" id="texteCommentaire"><?php echo old("texte");?></textarea>
                             <br>
-                            <p align="right" id="postCommentaire"><button>Poster le commentaire</button></p>
+                            <p align="right" class="postCommentaire"><button>Poster le commentaire</button></p>
                             <?php
                         }
                         ?>
@@ -108,13 +108,15 @@ ob_start();
                 if (COUNT($article->getCommentaires()) > 0) {
                     foreach ($article->getCommentaires() as $commentaire) {
                         ?>
+                        <div id="divcommentaires"></div>
                         <div class="blockCard">
-                            <div class="cardComment">
+                                   <div class="cardComment">
+
                                 <div class="top">
-                                    <?php echo escape($article->getTitre()); ?>
+                                    <?php echo escape($commentaire->getTitre()); ?>
                                     (posté
                                     <?php
-                                    $date = new DateTimeImmutable(escape($article->getDate()));
+                                    $date = new DateTimeImmutable(escape($commentaire->getDate()));
                                     echo $date->format('D d M Y');
                                     ?> par <?php echo escape($commentaire->getPseudoUser()); ?> )
 
@@ -138,7 +140,6 @@ ob_start();
                                 </div>
 
                                 <div class="top">
-                                    <div id="divcommentaires"></div>
                                     <p><?php echo escape($commentaire->getTexte()); ?>
                                 </div>
                             </div>
