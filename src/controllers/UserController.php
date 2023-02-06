@@ -19,13 +19,11 @@ class UserController
     {
         require VIEWS . 'Auth/login.php';
     }
-
     /** Affichage de la page register **/
     public function showRegister()
     {
         require VIEWS . 'Auth/register.php';
     }
-
     /** logout **/
     public function logout()
     {
@@ -34,7 +32,6 @@ class UserController
         header('Location: /');
     }
     public function register() {
-
         $res = $this->manager->getUserbyPseudo($_POST["pseudo"]);
         if ((!empty($_POST['pseudo']) && !empty($_POST['password'])) && ($_POST['password'] == $_POST['passwordConfirm'])) {
             if (empty($res)) {
@@ -67,14 +64,13 @@ class UserController
         $users = $this->manager->getPseudoByWords();
         if ($users) {
             foreach ($users as $user) {
-                $output .= "<a href='/user/" . $user->getId_user() . "'>" . $user->getPseudo() . "</a><br>";
+                $output .= "<a href='/articleUser/" . $user->getId_user() . "'>" . $user->getPseudo() . "</a><br>";
             }
             echo $output;
         }
     }
     /** Vérification de l'authentification **/
-    public function login()
-    {
+    public function login() {
         $_SESSION['old'] = $_POST;
         //on recherche si le pseudo existe
         $user = $this->manager->getUserbyPseudo($_POST["pseudo"])[0];

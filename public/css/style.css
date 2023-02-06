@@ -585,14 +585,13 @@ section.dashboard .card .bottom .check {
 }
 #meteo {
     width:250px;
-    margin-left: auto; 
+    margin-left: auto;
     margin-right: 0;
 }
 
 #meteo ul {
     list-style: none;
 }
-
 
 /* CSS Homepage */
 
@@ -849,14 +848,35 @@ section.homepage p {
     transition: all .5s ease;
     cursor: pointer;
 }
-
+#logout{
+    display: flex;
+    justify-content: center;
+}
 .viewList .btnCheckFalse:hover {
     background-color: red;
     transition: all .5s ease;
     border-radius: 100%;
     transition: all .5s ease;
 }
+#like{
+    color: green;
+    font-weight: bold;
+    font-size: 25px;
+}
 
+#error{
+    font-weight: bold;
+    font-size: 25px;
+    color: red;
+    margin: auto;
+}
+#postCommentaire{
+    background-color: green;
+    border: 0;
+    padding: 15px 30px;
+    cursor: pointer;
+    margin: 15px 0 0 0 ;
+}
 .viewList .btnCheckFalse i {
     font-size: 20px;
     color: red;
@@ -1035,25 +1055,25 @@ section.create h1 {
 /*Resize the wrap to see the search bar change!*/
 
 section.create>div {
-display: flex;
-align-items: center;
-justify-content: center;
-flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
 }
 
 section.create .list {
-min-width: 40%;
-height: 70%;
-border-radius: 15px;
-background-color: #013a6b;
-display: flex;
-flex-direction: column;
+    min-width: 40%;
+    height: 70%;
+    border-radius: 15px;
+    background-color: #013a6b;
+    display: flex;
+    flex-direction: column;
 }
 
 section.create .list .top {
-width: 100%;
-padding: 20px 20px 10px 20px;
-color:white;
+    width: 100%;
+    padding: 20px 20px 10px 20px;
+    color:white;
 }
 
 section.dashboard h1{
@@ -1063,71 +1083,102 @@ section.dashboard h1{
 }
 
 section.create form input {
-height: 30px;
-background-color: transparent;
-border: none;
-color: white;
-flex: 1;
-margin-right: 10px;
+    height: 30px;
+    background-color: transparent;
+    border: none;
+    color: white;
+    flex: 1;
+    margin-right: 10px;
 }
 
 section.create form input::placeholder {
-color: white;
+    color: white;
 }
 
 section.create form button {
-padding: 10px 10px;
-background-color: transparent;
-border: none;
-color: white;
-border-radius: 100%;
-cursor: pointer;
-transition: background .5s ease;
+    padding: 10px 10px;
+    background-color: transparent;
+    border: none;
+    color: white;
+    border-radius: 100%;
+    cursor: pointer;
+    transition: background .5s ease;
 }
 
 section.create form button:hover {
-background-color: #052659ff;
-transition: background .5s ease;
+    background-color: #052659ff;
+    transition: background .5s ease;
 }
 
 section.create .list .top .error,section.create .list .bottom .error {
-color: red;
+    color: red;
 }
 
 section.create .list .separator {
-border-top: 4px solid white;
-width: 100%;
+    border-top: 4px solid white;
+    width: 100%;
 }
 
 section.create .list .bottom {
-width: 100%;
-padding: 20px 20px 10px 20px;
-flex-grow: 1;
-color:white;
+    width: 100%;
+    padding: 20px 20px 10px 20px;
+    flex-grow: 1;
+    color:white;
 }
 
 .top img:not(#imgEdit) {
-width:400px;
+    width:400px;
 }
 #divEdit{
-display: flex;
-justify-content: space-between;
-background-color: #E5E5E5;
-color: black;
-border: 1px solid black;
-padding: 5px;
-margin: 5px;
-align-items: center;
+    display: flex;
+    justify-content: space-between;
+    background-color: #E5E5E5;
+    color: black;
+    border: 1px solid black;
+    padding: 5px;
+    margin: 5px;
+    align-items: center;
 }
 #imgEdit{
-width: 20px;
+    width: 20px;
 }
 /* CSS page 404 */
 
 section.error {
     margin: 50px;
 }
+.heart {
+    cursor: pointer;
+    height: 50px;
+    width: 50px;
+    background-image:url( 'https://abs.twimg.com/a/1446542199/img/t1/web_heart_animation.png');
+    background-position: left;
+    background-repeat:no-repeat;
+    background-size:2900%;
+    border: 0;
+}
 
+.heart:hover {
+    background-position: right;
+}
+#like{
+    display: flex;
+    justify-content: center;
+}
+#texteCommentaire{
+    color: black;
+}
+
+.is_animating {
+    animation: heart-burst .8s steps(28) 1;
+}
+.padding{
+    padding: 0 30px;
+}
+@keyframes heart-burst {
+    from {background-position:left;}
+    to { background-position:right;}
+}
 section.error h1 {
     color: #052659ff;
     font-size: 50px;
@@ -1185,7 +1236,7 @@ section.error a {
     main {
         margin-top: 60px;
         margin-left: 0px;
-        
+
     }
 
     * section {

@@ -6,6 +6,13 @@ ob_start();
         <h1><i class="fas fa-list-alt logoPage"></i> Liste des articles :</h1>
         <div class="blockAllList" id="masonry">
             <?php
+            if(ISSET($_SESSION["erreur"])){?>
+                <p id="error"><?php echo $_SESSION["erreur"]; ?> </p>
+                <?php
+            }
+            else if(ISSET($_SESSION["like"])){ ?>
+                <p id="like"><?php echo $_SESSION["like"]; ?></p>
+            <?php }
             foreach ($articles as $article) {
                 ?>
                 <div class="blockCard">
@@ -41,11 +48,10 @@ ob_start();
                                 ?>
                             </form>
 
-                            <form action="/dashboard/update" method="post">
+                            <a href="/article/<?php echo escape($article->getId_article()); ?>/modify">
                                 <?php
                                 if (isset($_SESSION["user"])) {
                                     if ($_SESSION["user"]["pseudo"] == escape($article->getPseudoUser())) {?>
-                                       <input type="hidden" value="<?php echo escape($article->getId_article()); ?>">
                                         <button class="button btn-danger" type="submit">
                                             <img src="/image/edit.png" alt="" id="imgEdit">
                                             <span>Modifier</span>
@@ -54,31 +60,42 @@ ob_start();
                                     }
                                 }
                                 ?>
-                            </form>
+                            </a>
 
-                            <form action="/dashboard/commentaire/" method="post">
                                 <?php
                                 if (isset($_SESSION["user"])) {
                                     ?>
-                                <label for="new"></label>
-                                <input type="text" id="new" placeholder="new comment" name="texte" required>
-                                <input type="hidden" id="hidden" name="IdArticleCommente" value="<?php echo escape($article->getId_article()); ?>" required>
+                                <label for="texteCommentaire"></label>
+                                <input type="text" id="texteCommentaire" placeholder="new comment" name="texte" required>
+                                <input type="hidden" id="IdArticleCommente" name="IdArticleCommente" value="<?php echo escape($article->getId_article()); ?>" required>
                                 <label for="imageComment"></label>
-                                <input type="file" id="imageComment" name="photo">
-                                <button type="submit">Envoyer</button>
+                                <button type="submit" id="postCommentaire">Envoyer</button>
                                     <?php
                                     }
                                 ?>
-                            </form>
-                        </div>
-                        <div class="top">
-                            <?php
+                       </div>
+                        <article id="photoLike">
+                            <div class="top">
+                                <?php
                                 if (!empty($article->getPhoto())) { ?>
                                     <p><img src="/image/<?php echo escape($article->getPhoto()); ?>" alt=""></p>
+                                    <?php
+                                }
+                                ?>
+                            </div>
+                            <form action="/dashboard/<?php echo escape($article->getId_article()); ?>/like" method="post">
                                 <?php
-                            }
-                            ?>
-                        </div>
+                                if (isset($_SESSION["user"])) {
+                                    ?>
+                                    <div id="like">
+                                        <input type="hidden" name="Id_article" value="<?php echo escape($article->getId_article()); ?>">
+                                        <button class="heart"></button>
+                                    </div>
+                                    <?php
+                                }
+                                ?>
+                            </form>
+                        </article>
                         <div class="top">
                             <p><?php echo escape($article->getTexte()); ?>
                         </div>
@@ -91,17 +108,18 @@ ob_start();
                         ?>
                         <div class="blockCard">
                             <div class="cardComment">
+                                <div id="divCommentaires">
+                                </div>
+
                                 <div class="top">
                                     <p><?php echo "(***" . escape($commentaire->getTitre()); ?>***)</p>
                                     <hr>
                                     <p>
-                                        <img src="image/<?php echo escape($commentaire->getPhoto()); ?>" alt="img">
                                     <form action="/dashboard/<?php echo escape($commentaire->getId_article()); ?>/delete"
                                           method="post">
                                         <?php
                                         if (isset($_SESSION["user"])) {
                                             if ($_SESSION["user"]["pseudo"] == escape($commentaire->getPseudoUser()) || $_SESSION["user"]["role"] == 'admin') {
-
                                                 ?>
                                                 <button class="button btn-danger" type="submit"
                                                         onclick="return confirm('Êtes-vous sur de vouloir supprimer ce métier ?')">
@@ -121,7 +139,7 @@ ob_start();
                                     </form>
                                 </div>
 
-                                <div class="top">
+                                <div class="top padding">
                                     <p><?php echo escape($commentaire->getTexte()); ?>
                                 </div>
                             </div>

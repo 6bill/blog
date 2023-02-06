@@ -11,16 +11,15 @@ ob_start();
                 <div class="separator"></div>
                 <div class="bottom">
                     <form action="/dashboard/update" method="post">
-                        <input type="text" name="titre" value="<?php echo old("name");?>" placeholder="Titre de l'article">
-                        <input type="hidden" name="idArticle" value="<?php echo old("name");?>">
+                        <input type="text" name="titre" value="<?php echo $article->getTitre()?>" placeholder="Titre de l'article">
+                        <input type="hidden" name="IdArticle" value="<?php echo $article->getId_article();?>">
                         <p>
-                            Photo: <input type="file" name="photo">
+                            Photo: <input type="file" name="photo" value="<?php echo $article->getPhoto();?>">
                         </p>
-                        <textarea name="texte" rows="8" cols="40" placeholder="Commentaire de l'article"><?php echo old("texte");?></textarea>
+                        <textarea name="texte" rows="8" cols="40" placeholder="texte de l'article"><?php echo $article->getTexte();?></textarea>
                         <br>
-                        <p align="right"><button>Poster l'article</button></p>
+                        <p align="right"><button  type="submit">Mettre à jour l'article</button></p>
                     </form>
-                    <span class="error"><?php echo error("name");?><?php echo error("texte");?></span>
                 </div>
             </div>
         </div>

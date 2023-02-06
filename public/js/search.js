@@ -17,17 +17,18 @@ function rechercheArticlesParMotsClefs(recherche) {
 
 
 //Création de l'évènement keyup pour la barre de recherche par mots clefs
-$('#searchByWordsPseudo').on('keyup', (evt) => {
-    let value = $('#searchByWordsPseudo').val();
+$('#searchByWordsArticle').on('keyup', (evt) => {
+    let value = $('#searchByWordsArticle').val();
     if (value.length >= 2){
-        recherchePseudoParMotsClefs(value);
+        rechercheArticlesParMotsClefs(value);
     }
     else {
         $('.error').text('champ vide');
     }
 });
-function recherchePseudoParMotsClefs(recherche) {
-    $.post('/article/searchByWordsPseudo/', {
+
+function recherchePseudosParMotsClefs(recherche) {
+    $.post('/user/searchByWordsPseudo/', {
         recherche: recherche.trim()
     }).done(function( data ) {
         if (data != null) {
@@ -42,13 +43,22 @@ function recherchePseudoParMotsClefs(recherche) {
 
 
 //Création de l'évènement keyup pour la barre de recherche par mots clefs
-$('#searchByWordsArticle').on('keyup', (evt) => {
-    let value = $('#searchByWordsArticle').val();
+$('#searchByWordsPseudo').on('keyup', (evt) => {
+    let value = $('#searchByWordsPseudo').val();
     if (value.length >= 2){
-        rechercheArticlesParMotsClefs(value);
+        recherchePseudosParMotsClefs(value);
     }
     else {
         $('.error').text('champ vide');
     }
 });
 
+/* when a user clicks, toggle the 'is-animating' class */
+$(".heart").on('click touchstart', function(){
+    $(this).toggleClass('is_animating');
+});
+
+/*when the animation is over, remove the class*/
+$(".heart").on('animationend', function(){
+    $(this).toggleClass('is_animating');
+});

@@ -55,11 +55,13 @@ class UserManager
             $_POST["role"],
         ));
     }
-    public function getPseudoByWords(){
-        $stmt = $this->bdd->prepare('SELECT * FROM User WHERE pseudo = ?');
+
+    public function getPseudoByWords()
+    {
+        $stmt = $this->bdd->prepare('SELECT * FROM User WHERE pseudo LIKE ?');
         $stmt->execute(array(
             "%" . $_POST['recherche'] . "%"
         ));
-        return $stmt->fetchAll(\PDO::FETCH_CLASS, "Blog\Models\Commentaire");
+        return $stmt->fetchAll(\PDO::FETCH_CLASS, "Blog\Models\User");
     }
 }

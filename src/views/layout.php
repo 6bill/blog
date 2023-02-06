@@ -32,10 +32,10 @@
                     <p class="hidden">Notifications</p></a>
                 </div>';
                 }
-                echo '<form action="/logout/" method="post">
+                echo '<form action="/logout/" method="post" id="logout">
                     <button type="submit" id="logout" class="hoverLink">
                         <a href="/" class="icon" type="submit">
-                            <img src="../image/logout.png" alt="logout">
+                            <img src="../../image/logout.png" alt="logout">
                         </a>
                         <p class="hidden">Logout</p>
                     </button>
@@ -70,8 +70,10 @@
 
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script src="../js/search.js"></script>
+<script src="../js/postCommentaire.js"></script>
 </body>
 </html>
 <?php
-unset($_SESSION['error']);
+unset($_SESSION['erreur']);
+unset($_SESSION['like']);
 unset($_SESSION['old']);
