@@ -59,15 +59,66 @@ class ArticleController
         }
     }
 
-    /** Enregistrement de l'article **/
+    /** Enregistrement d'un commentaire **/
     public function storeCommentaire()
     {
-        if (isset($_SESSION["user"])) {
-            $this->manager->storeCommentaire();
-            if (isset($_FILES["photo"])) {
-                move_uploaded_file($_FILES["photo"]["tmp_name"], "image/" . $_FILES["photo"]["name"]);
+        // On vérifie la méthode de la requete AJAX
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // On vérifie si l'utilisateur est connecté
+            if (isset($_SESSION['user']['id'])) {
+                // L'utilisateur est connecté
+                // On récupère les données envoyées en JSON par AJAX
+                $donneesJson = file_get_contents('php://input');
+                // On convertit les données JSON en objet PHP
+                $donnees = json_decode($donneesJson);
+                // On vérifie si on a un bien les données à insérer dans la table
+                if (isset($donnees->commentaire) && !empty($donnees->commentaire)) {
+                    $articles = $this->manager->storeCommentaire($donnees->commentaire, $donnees->IdArticleCommente);
+//*************************************************************
+//*************************************************************
+//*************************************************************
+//RENVOIE DU COMMENTAIRE AU FICHIER JS AJAX
+                    $output = "";
+                    foreach ($articles as $commentaire) {
+
+                        $output .= "<div class='blockCard'>
+                            <div class='cardComment'>
+                                <div class='top'>
+                                    <p>(*** " . $commentaire->getTitre() . " ***)
+                                    <hr>
+                                    </p>
+                                    <p>
+
+                                    <form action='/dashboard/" . $commentaire->getId_article() . "/delete'
+                                          method='post'>";
+
+                        if (isset($_SESSION['user'])) {
+                            if ($_SESSION['user']['pseudo'] == $commentaire->getPseudoUser() || $_SESSION['user']['role'] == 1) {
+                                $output .= "<button class='button btn-danger' type='submit'>
+                                <span>Delete</span></button>";
+                            }
+
+                        }
+
+                        $output .= "</form>
+                                    </p>
+                                </div>
+
+                                <div class='top'>
+                                    <p>" . $commentaire->getTexte() . "
+                                </div>
+                            </div>
+                        </div>";
+                    }
+//FIN DU HTML QUI RENVOIE LE COMMENTAIRE EN AJAX
+//***********************************************************************************
+//***********************************************************************************
+//***********************************************************************************
+
+
+                    echo $output;
+                }
             }
-            header("Location: /dashboard");
         }
     }
     /** Enregistrement de l'article **/
@@ -122,31 +173,20 @@ class ArticleController
             echo $output;
         }
     }
-
     /** Formulaire de recherche d'un article par mots clefs **/
-    public function searchArticleByPseudo()
+    public function showArticleByUser($id)
     {
         $output = "";
-        $articles = new Article();
-        $users = $this->manager->getArticleByPseudo();
-        if ($users) {
-            foreach ($users as $user) {
-                foreach ($articles as $article) {
-                    $output .= "<a  href='/article/" . $article->getId_article() . "'>" . $user->getPseudo() . "</a><br>";
-
-                    echo $output;
-                }
-            }
-        }
-    }
-
-    public function showOne(){
-        $this->manager->getOneArticle();
+        $articles = $this->manager->getArticleUser($id);
         require VIEWS . 'Article/index.php';
     }
 
-    public function showArticleByPseudo(){
-        $this->manager->getArticleByPseudo();
+
+
+    public function showOne($id){
+        $output = "";
+        $articles = $this->manager->getOneArticle($id);
         require VIEWS . 'Article/index.php';
     }
+
 }

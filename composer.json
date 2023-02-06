@@ -1,6 +1,8 @@
 {
   "name": "6bill/blog",
-  "require": {},
+  "require": {
+    "ext-json": "*"
+  },
   "autoload": {
     "psr-4": {
       "Blog\\": "src/"

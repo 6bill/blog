@@ -86,4 +86,18 @@ class UserController
         }
     }
 
+    /** Formulaire de recherche d'un article par mots clefs **/
+    public function searchUserByPseudo()
+    {
+        $output = "";
+        $users = $this->manager->searchUserByPseudo();
+        if ($users) {
+            foreach ($users as $user) {
+                $output .= "<a  href='/articleUser/" . $user->getId_user() . "'>" . $user->getPseudo() . "</a><br>";
+
+                echo $output;
+            }
+        }
+    }
+
 }

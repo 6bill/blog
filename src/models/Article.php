@@ -84,6 +84,22 @@ class Article
         return $user->getPseudo();
     }
 
+    public function getIdByPseudo()
+    {
+        $userManagement = new UserManager();
+        $user = $userManagement->getUserbyId($this->getId_user());
+
+        return $user->getPseudo();
+    }
+
+    public function getLike()
+    {
+        $likeManagement = new LikeManager();
+        $like = $likeManagement->getLike($this->getId_article());
+
+        return $like;
+    }
+
     //faux getter pour récupérer les commentaires de l'article
     public function getCommentaires()
     {  //on appelle la méthode "getArticleCommentaires" de l' ArticleManager

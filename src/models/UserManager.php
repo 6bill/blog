@@ -30,6 +30,16 @@ class UserManager
         return $stmt->fetch();
     }
 
+    /** Récupération d'un user à partir de son id**/
+    public function searchUserByPseudo()
+    {
+        $stmt = $this->bdd->prepare("SELECT * FROM user WHERE pseudo LIKE ?");
+        $stmt->execute(array(
+           "%" . $_POST["recherche"] ."%"
+        ));
+        return $stmt->fetchAll(\PDO::FETCH_CLASS, "Blog\Models\User");
+    }
+
 
     /** Récupération de tous les user avec leur rôle **/
     public function all()

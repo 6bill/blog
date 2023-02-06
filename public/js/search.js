@@ -19,6 +19,8 @@ function rechercheArticlesParMotsClefs(recherche) {
 //Création de l'évènement keyup pour la barre de recherche par mots clefs
 $('#searchByWords').on('keyup', (evt) => {
     let value = $('#searchByWords').val();
+    console.log(value)
+
     if (value.length >= 2){
         rechercheArticlesParMotsClefs(value);
     }
@@ -32,19 +34,19 @@ $('#searchByWords').on('keyup', (evt) => {
 function recherchePseudoParMotsClefs(recherche) {
     $.post('/article/searchByPseudo/', {
         recherche: recherche.trim()
-    }).done(function( data ) {
+    }).done(function (data) {
         if (data != null) {
             $('.resultByPseudo').html(data);
-        }
-        else {
+        } else {
             this.style.borderRadius = '15px';
             $('.resultByPseudo').html('');
         }
     });
-
+}
 
     $('#searchByPseudo').on('keyup', (evt) => {
         let value = $('#searchByPseudo').val();
+        console.log(value)
         if (value.length >= 2){
             recherchePseudoParMotsClefs(value);
         }
@@ -52,4 +54,3 @@ function recherchePseudoParMotsClefs(recherche) {
             $('.error').text('champ vide');
         }
     });
-}

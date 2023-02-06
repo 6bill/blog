@@ -12,7 +12,7 @@ $router->get('/', "ArticleController@index");
 $router->get('/verify', "ArticleController@verify");
 $router->get('/dashboard/', "ArticleController@showAll");
 $router->get('/article/:article', "ArticleController@showOne");
-$router->get('/article/:article', "ArticleController@showArticleByPseudo");
+$router->get('/articleUser/:user', "ArticleController@showArticleByUser");
 $router->get('/dashboard/nouveau/', "ArticleController@create");
 $router->get('/login', "UserController@index");
 $router->get('/register', "UserController@showRegister");
@@ -21,16 +21,17 @@ $router->get('/logout', "UserController@logout");
 
 $router->post('/dashboard/modification/', "ArticleController@modification");
 $router->post('/dashboard/:article/delete/', "ArticleController@delete");
-$router->post('/dashboard/:article/commentaire/', "ArticleController@storeCommentaire");
+$router->post('/postCommentaire/', "ArticleController@storeCommentaire");
 $router->post('/dashboard/nouveau/', "ArticleController@store");
 $router->post('/dashboard/verify/agree/', "ArticleController@check");
 $router->post('/login', "UserController@login");
 $router->post('/register', "UserController@register");
 $router->post('/logout', "UserController@logout");
 $router->post('/dashboard/doneModif/', "ArticleController@storeModif");
-$router->post('/dashboard/like/', "LikeController@storeLike");
+$router->post('/dashboard/:like/like', "LikeController@storeLiked");
+$router->post('/dashboard/:unLike/unLike', "LikeController@delLike");
 $router->post('/article/searchByWords/', "ArticleController@searchArticleByWords");
-$router->post('/article/searchByPseudo/', "ArticleController@searchArticleByPseudo");
+$router->post('/article/searchByPseudo/', "UserController@searchUserByPseudo");
 
 
 

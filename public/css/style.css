@@ -4,32 +4,44 @@
 }
 
 html {
-    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    gap: 10px;
+    position: relative;
+    width: 100%;
+    height: 100%    ;
 }
 
 body {
-    height: 100vh;
-    width: 100%;
-    margin: 0;
-    background-color: rgba(170, 172, 175, 0.6);
+    /* Auto layout */
     display: flex;
     flex-direction: row;
+    align-items: flex-start;
+    padding: 0;
+    width: 100%;
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 1;
 }
 
 header {
-    width: 100%;
-   
     position: fixed;
+    background-color: #0d1028;
+    opacity: 0.9;
+    height: 100%;
 }
 
 nav {
-   
-    background-color: rgb(38, 15, 68);
-    color: white;
     display: flex;
-    
+    flex-direction: column;
     align-items: center;
-    
+    padding: 24px 20px;
+    gap: 15px;
+    width: 147px;
 }
 
 nav a {
@@ -38,7 +50,7 @@ nav a {
 }
 
 nav>* {
-   
+
 }
 
 nav a.logo {
@@ -80,326 +92,26 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: 90px;
-}
-
-/* CSS Form Register */
-.sup {
-    color: red;
-}
-
-.formLogin {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #013a6b;
-    color: white;
-    border-radius: 15px;
-}
-
-.formLogin h1 {
-    margin: 20px 0;
-    text-align: center;
-}
-
-.formLogin .separateur {
-    border-top: 4px solid white;
-    border-radius: 100%;
-    width: 85%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.formLogin form {
     width: 100%;
-    margin: 25px 0;
-    padding: 0 50px;
-}
-
-.formLogin .blockInput {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
-}
-
-.formLogin .labelInput {
-    display: flex;
-    flex-direction: row;
+    height: 100%;
 }
 
 section.dashboard .cardComment {
-    width: 500px;
-    background-color: #bbf6ec;
+    background: darkslateblue fixed;
+    color: white;
     border-radius: 15px;
     padding: 2%;
-    margin: 5%;
+    margin: 5%
 }
 
-.formLogin .error {
-    color: red;
-    font-weight: bold;
-}
 
-.formLogin .labelInput label {
-    color: #052659ff;
-    padding: 0 8px;
-    background-color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-top-left-radius: 15px;
-    border-bottom-left-radius: 15px;
-}
-
-.formLogin .labelInput input {
-    display: flex;
-    color: #052659ff;
-    flex-grow: 1;
-    border: none;
-    padding: 8px;
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
-}
-
-.formLogin .labelInput input::placeholder {
-    color: #052659ff;
-}
-
-.formLogin .labelInput input.inputPassword {
-    border-radius: 0;
-}
-
-.formLogin .labelInput .viewPassword {
-    background-color: white;
-    border: none;
-    color: #052659ff;
-    padding: 0 8px;
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
-}
-
-.formLogin .labelInput .viewPassword>i {
-    font-size: 15px;
-}
-
-.formLogin .focus label {
-    color: white;
-    border-left: 1px solid white;
-    border-top: 1px solid white;
-    border-bottom: 1px solid white;
-    background-color: #052659ff;
-}
-
-.formLogin .focus input {
-    border-top: 1px solid white;
-    border-bottom: 1px solid white;
-    border-right: 1px solid white;
-    color: white;
-    background-color: #052659ff;
-}
-
-.formLogin .focus input.inputPassword {
-    border-top: 1px solid white;
-    border-bottom: 1px solid white;
-    border-right: 0;
-}
-
-.formLogin .focus input::placeholder {
-    color: white;
-}
-
-.formLogin .focus .viewPassword {
-    border-top: 1px solid white;
-    border-bottom: 1px solid white;
-    border-right: 1px solid white;
-    color: white;
-    background-color: #052659ff;
-}
-
-.formLogin form>button {
-    background-color: white;
-    color: #052659ff;
-    border: 1px solid #052659ff;
-    border-radius: 15px;
-    cursor: pointer;
-    padding: 8px 13px;
-    transition: all .5s ease;
-}
-
-.formLogin form>button:hover, .formLogin form>button:focus {
-    background-color: #052659ff;
-    color: white;
-    border: 1px solid white;
-    transition: all .5s ease;
-}
-
-.formLogin .more {
-    width: 100%;
-    padding: 0 30px;
-    margin-bottom: 15px;
-}
-
-.formLogin .more a {
-    color: white;
-}
-
-/* CSS Form Register */
-.formRegister {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #013a6b;
-    color: white;
-    border-radius: 15px;
-}
-
-.formRegister h1 {
-    margin: 20px 0;
-    text-align: center;
-}
-
-.formRegister .separateur {
-    border-top: 4px solid white;
-    border-radius: 100%;
-    width: 85%;
-}
-
-.formRegister form {
-    width: 100%;
-    margin: 25px 0;
-    padding: 0 50px;
-}
-
-.formRegister form .line {
-    display: flex;
-    justify-content: space-around;
-}
-
-.formRegister .blockInput {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
-}
-
-.formRegister .labelInput {
-    display: flex;
-    flex-direction: row;
-}
-
-.formRegister .error {
-    color: red;
-    font-weight: bold;
-}
-
-.formRegister .labelInput label {
-    color: #052659ff;
-    padding: 0 8px;
-    background-color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-top-left-radius: 15px;
-    border-bottom-left-radius: 15px;
-}
-
-.formRegister .labelInput input {
-    display: flex;
-    color: #052659ff;
-    flex-grow: 1;
-    border: none;
-    padding: 8px;
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
-}
-
-.formRegister .labelInput input::placeholder {
-    color: #052659ff;
-}
-
-.formRegister .labelInput input.inputPassword {
-    border-radius: 0;
-}
-
-.formRegister .labelInput .viewPassword {
-    background-color: white;
-    border: none;
-    color: #052659ff;
-    padding: 0 8px;
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
-}
-
-.formRegister .labelInput .viewPassword>i {
-    font-size: 15px;
-}
-
-.formRegister .focus label {
-    color: white;
-    border-left: 1px solid white;
-    border-top: 1px solid white;
-    border-bottom: 1px solid white;
-    background-color: #052659ff;
-}
-
-.formRegister .focus input {
-    border-top: 1px solid white;
-    border-bottom: 1px solid white;
-    border-right: 1px solid white;
-    color: white;
-    background-color: #052659ff;
-}
-
-.formRegister .focus input.inputPassword {
-    border-top: 1px solid white;
-    border-bottom: 1px solid white;
-    border-right: 0;
-}
-
-.formRegister .focus input::placeholder {
-    color: white;
-}
-
-.formRegister .focus .viewPassword {
-    border-top: 1px solid white;
-    border-bottom: 1px solid white;
-    border-right: 1px solid white;
-    color: white;
-    background-color: #052659ff;
-}
-
-.formRegister form>button {
-    background-color: white;
-    color: #052659ff;
-    border: 1px solid #052659ff;
-    border-radius: 15px;
-    cursor: pointer;
-    padding: 8px 13px;
-    transition: all .5s ease;
-}
-
-.formRegister form>button:hover, .formRegister form>button:focus {
-    background-color: #052659ff;
-    color: white;
-    border: 1px solid white;
-    transition: all .5s ease;
-}
-
-.formRegister .more {
-    width: 100%;
-    padding: 0 30px;
-    margin-bottom: 15px;
-}
-
-.formRegister .more a {
-    color: white;
-}
 
 /* CSS page Article */
 section.dashboard {
-    padding: 50px 50px;
+    padding: 0 50px 50px 50px;
     flex: 1;
     height: 100%;
+    background-color: #21094E;
 }
 
 section.dashboard .topDashBoard {
@@ -469,7 +181,7 @@ section.dashboard .blockCard {
 
 section.dashboard .card {
     width: 627px;
-    background-color: #216464;
+    background-color: darkslateblue;
     border-radius: 15px;
 }
 
@@ -491,6 +203,8 @@ section.dashboard .card .top {
 section.dashboard .card .top>*{
     color: white;
     text-decoration: none;
+    display: block;
+    margin: auto;
 }
 
 section.dashboard .card .top i {
@@ -529,9 +243,11 @@ section.dashboard .card .bottom .check {
 
 
 /* CSS Homepage */
-
+.bg-planete  {
+    background: url("/image/NightSky.gif") no-repeat;
+    background-size: cover;
+}
 section.homepage>* {
-    color: #052659ff;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1004,6 +720,8 @@ section.create .list .bottom {
     display: flex;
     justify-content: center;
     flex-direction: column;
+    margin-top: 5%;
+    padding: 0 10%;
 }
 
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
@@ -1021,7 +739,7 @@ body{
 
 .searchTerm {
     width: 100%;
-    border: 3px solid #00B4CC;
+    border: 3px solid rebeccapurple;
     padding: 5px;
     height: 36px;
     border-radius: 5px;
@@ -1037,8 +755,8 @@ body{
 .searchButton {
     width: 40px;
     height: 36px;
-    border: 1px solid #00B4CC;
-    background: #00B4CC;
+    border: 1px solid rebeccapurple;
+    background: rebeccapurple;
     text-align: center;
     color: #fff;
     border-radius: 0 5px 5px 0;
@@ -1047,19 +765,90 @@ body{
 }
 
 /*Resize the wrap to see the search bar change!*/
+#recherche{
+    display: flex;
+    flex-direction: column;
+    justify-content: right;
+}
 .wrap{
-    width: 10%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    width: 100%;
+}
+p{
+    color: white;
+}
+#texteCommentaire{
+    text-align: center;
+    display: block;
+    margin: 5% auto 0;
+}
+.effetneon span,#Titre img{
+    font-size: 100px;
+    text-align: center;
+    margin-bottom: 10%;
+}
+#Titre{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#Titre img{
+    width: 15%;
+}
+header p {
+    text-align: center;
 }
 
-/*Resize the wrap to see the search bar change!*/
-.wrap2{
-    width: 10%;
-    position: absolute;
-    top: 50%;
-    left: 70%;
-    transform: translate(-50%, -50%);
+.effetneon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    text-align: center;
+    color: #fff;
+    text-shadow:
+            0 0 7px #fff,
+            0 0 10px #fff,
+            0 0 42px rgb(230, 18, 124),
+            0 0 77px rgb(230, 18, 124),
+            0 0 100px rgb(230, 18, 124);
+    animation: lumiere 1s infinite linear;
+}
+@keyframes lumiere {
+    0%{
+        text-shadow:
+                0 0 7px #fff,
+                0 0 10px #fff,
+                0 0 42px rgb(230, 18, 124),
+                0 0 77px rgb(230, 18, 124),
+                0 0 100px rgb(230, 18, 124);
+    }
+    50%{
+        text-shadow:
+                0 0 7px #fff,
+                0 0 10px #fff,
+                0 0 32px rgb(230, 18, 124),
+                0 0 87px rgb(230, 18, 124),
+                0 0 120px rgb(230, 18, 124);
+    }
+}
+.effetneon span {
+    font-size: 6rem;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+button #like{
+    border: none;
+    background-color: transparent;
+}
+.like{
+    border: none;
+    background-color: transparent;
 }

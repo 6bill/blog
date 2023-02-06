@@ -1,7 +1,9 @@
 <?php
 
-namespace Blog\models;
+namespace Blog\controllers;
+use Blog\controllers\UserController;
 
+namespace Blog\models;
 use Blog\models\Article;
 use Blog\models\UserManager;
 
@@ -19,32 +21,39 @@ class ArticleManager
     /** Enregistrement de l'article **/
     public function store()
     {
-        $stmt = $this->bdd->prepare("INSERT INTO article(Titre, Date, Photo, Texte, Id_user) VALUES (?, NOW(), ?, ?, ?)");
-        $retour = $stmt->execute(array(
-            $_POST["name"],
-            $_FILES["photo"]["name"],
-            $_POST["texte"],
-            $_SESSION["user"]["id"]
-        ));
-        return $retour;
+        if ($_SESSION['user']['role'] == 1){
+            $stmt = $this->bdd->prepare("INSERT INTO article(Titre, Date, Photo, Texte, Id_user, statue) VALUES (?, NOW(), ?, ?, ?, 1)");
+        }else {
+            $stmt = $this->bdd->prepare("INSERT INTO article(Titre, Date, Photo, Texte, Id_user) VALUES (?, NOW(), ?, ?, ?)");
+        }
+            $retour = $stmt->execute(array(
+                $_POST["name"],
+                $_FILES["photo"]["name"],
+                $_POST["texte"],
+                $_SESSION["user"]["id"],
+            ));
+            return $retour;
+
     }
 
     /** Enregistrement d'un commentaire **/
-    public function storeCommentaire()
+    public function storeCommentaire($texte, $IdArticleCommente)
     {
 //        $article = new Article();
 //        $date = escape($article->getDate());
 //        date_format($date, 'D d M Y');
+
+
         $titre = "Commentaire posté le par " . $_SESSION["user"]["pseudo"];
-        $stmt = $this->bdd->prepare("INSERT INTO article(Titre, Date, Photo, Texte, Id_user,IdArticleCommente ) VALUES (?, NOW(), ?, ?, ?,?)");
-        $retour = $stmt->execute(array(
+        $stmt = $this->bdd->prepare("INSERT INTO article(Titre, Date, Texte, Id_user,IdArticleCommente,statue ) VALUES (?, NOW(), ?, ?, ?,1)");
+        $stmt->execute(array(
             $titre,
-            $_FILES["photo"]["name"],
-            $_POST["texte"],
+            $texte,
             $_SESSION["user"]["id"],
-            $_POST["IdArticleCommente"]
+            $IdArticleCommente
         ));
-        return $retour;
+        $lastId = $this->bdd->lastInsertId();
+        return $this->getArticle($lastId);
     }
     public function checkACT(){
         $stmt = $this->bdd->prepare('UPDATE article SET statue = 1 WHERE Id_article= ?');
@@ -57,24 +66,11 @@ class ArticleManager
     /** Récupération de tous les articles **/
     public function getAll()
     {
-        $stmt = $this->bdd->prepare('SELECT * FROM article where statue = 1');
+        $stmt = $this->bdd->prepare('SELECT * FROM article where statue = 1 AND IdArticleCommente IS NULL');
         $stmt->execute(array());
         return $stmt->fetchAll(\PDO::FETCH_CLASS,"Blog\Models\Article");
     }
 
-    public function getOneArticle()
-    {
-        $stmt = $this->bdd->prepare('SELECT * FROM article where statue = 1 AND Id_article = ?');
-        $stmt->execute(array($_POST['IDARTICLE']));
-        return $stmt->fetchAll(\PDO::FETCH_CLASS,"Blog\Models\Article");
-    }
-
-    public function getArticleByPseudo()
-    {
-        $stmt = $this->bdd->prepare('SELECT * FROM `article` WHERE id_user = ?;');
-        $stmt->execute(array($_POST['IDPSEUDO']));
-        return $stmt->fetchAll(\PDO::FETCH_CLASS,"Blog\Models\Article");
-    }
 
     /** Récupération de l'article à partir de son id**/
     public function getArticle($id)
@@ -89,7 +85,7 @@ class ArticleManager
     /** Récupération des commentaires d'un article**/
     public function getArticleCommentaires($Id_article)
     {
-        $stmt = $this->bdd->prepare('SELECT * FROM article WHERE IdArticleCommente = ?');
+        $stmt = $this->bdd->prepare('SELECT * FROM article WHERE IdArticleCommente = ? AND statue = 1');
         $stmt->execute(array(
             $Id_article
         ));
@@ -136,9 +132,22 @@ class ArticleManager
         $stmt->execute(array(
             '%' . $_POST["recherche"] .'%'
         ));
-
         return $stmt->fetchAll(\PDO::FETCH_CLASS,"Blog\Models\Article");
 
+    }
+
+    public function getArticleUser($id)
+    {
+        $stmt = $this->bdd->prepare("SELECT * FROM article  WHERE Id_user = ? ");
+        $stmt->execute(array($id));
+        return $stmt->fetchAll(\PDO::FETCH_CLASS,"Blog\Models\Article");
+    }
+
+    public function getOneArticle($id)
+    {
+        $stmt = $this->bdd->prepare('SELECT * FROM article where Id_article = ?');
+        $stmt->execute(array($id));
+        return $stmt->fetchAll(\PDO::FETCH_CLASS,"Blog\Models\Article");
     }
 
 }
