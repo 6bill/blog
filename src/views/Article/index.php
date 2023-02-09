@@ -65,7 +65,7 @@ ob_start();
                             </form>
 
                             <form action="/dashboard/modification/" method="post">
-                                <input type="hidden" name="IDARTICLE" value="<?php echo escape($article->getId_article()); ?>">
+                                <input type="hidden" name="idArticle" value="<?php echo escape($article->getId_article()); ?>">
                                 <?php
                                 if ($_SESSION["user"]["pseudo"] == escape($article->getPseudoUser())) {?>
                                     <button class="button btn-danger" type="submit">
@@ -92,7 +92,7 @@ ob_start();
                             <p><?php echo escape($article->getTexte()); ?>
                         </div>
                         <?php if (isset($_SESSION["user"])) { ?>
-                            <input type="hidden" value="<?php echo escape($article->getId_article()); ?>" id="IdArticleCommente">
+                            <input type="hidden" value="<?php echo escape($article->getId_article()); ?>" id="idArticleCommente">
                             <label for="texteCommentaire">
                                 <textarea name="texte" rows="2" cols="40" placeholder="Commentaire de l'article" id="texteCommentaire"><?php echo old("texte");?></textarea>
                             </label>

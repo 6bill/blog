@@ -16,7 +16,7 @@ function ajoutCommentaire() {
     // On récupère le commentaire
 
         let commentaire = document.querySelector("#texteCommentaire")
-        let IdArticleCommente = document.querySelector("#IdArticleCommente")
+        let idArticleCommente = document.querySelector("#idArticleCommente")
 
     // On vérifie si le commentaire n'est pas vide
     console.log(commentaire);
@@ -24,7 +24,7 @@ function ajoutCommentaire() {
         // On crée un objet JS
         let donnees = {}
             donnees["commentaire"] = commentaire
-            donnees["IdArticleCommente"] = IdArticleCommente
+            donnees["IdArticleCommente"] = idArticleCommente
 
         // On convertit les données en JSON
         let donneesJson = JSON.stringify(donnees)

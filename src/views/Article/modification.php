@@ -27,10 +27,11 @@ ob_start();
                         <div class="top">
                             <?php
                             if (!empty($article->getPhoto())) { ?>
-                                <p><img src="image/<?php echo escape($article->getPhoto()); ?>" name="image" alt="imageArticle"></p>
+                                <p><img src="image/<?php echo escape($article->getPhoto()); ?>" alt="imageArticle"></p>
                                 <?php
                             }
                             ?>
+                            <input type="file" name="image" value="img">
                         </div>
                         <div id="modif">
                             <label for="texteModif"><textarea name="Texte" id="texteModif" cols="80" rows="10" ><?php echo escape($article->getTexte());?></textarea></label>

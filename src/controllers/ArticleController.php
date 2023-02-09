@@ -44,7 +44,7 @@ class ArticleController
     /** Formulaire de modification d'article **/
     public function modification()
     {
-        $articles = $this->manager->getArticle($_POST['IDARTICLE']);
+        $articles = $this->manager->getArticle($_POST['idArticle']);
         require VIEWS . 'Article/modification.php';
     }
 

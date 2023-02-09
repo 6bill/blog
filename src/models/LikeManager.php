@@ -23,7 +23,7 @@ class LikeManager
         $stmt = $this->bdd->prepare("INSERT INTO `like` (Id_user,Id_article ) VALUES (?, ?)");
         $stmt->execute(array(
             $_SESSION["user"]["id"],
-            $_POST['IDARTICLE'],
+            $_POST['idArticle'],
         ));
     }
     public function getLike($id)

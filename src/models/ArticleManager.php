@@ -58,7 +58,7 @@ class ArticleManager
     public function checkACT(){
         $stmt = $this->bdd->prepare('UPDATE article SET statue = 1 WHERE Id_article= ?');
         $stmt->execute(array(
-            $_POST['IDARTICLE']
+            $_POST['idArticle']
         ));
         return $stmt->fetchAll(\PDO::FETCH_CLASS,"Blog\Models\Article");
     }
@@ -109,7 +109,7 @@ class ArticleManager
             $_POST['Titre'],
             $_POST['image'],
             $_POST['Texte'],
-            $_POST['IDARTICLE']
+            $_POST['idArticle']
         ));
     }
 
