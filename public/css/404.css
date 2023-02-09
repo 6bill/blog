@@ -5,7 +5,6 @@ body{
     height:100vh;
     background-image: linear-gradient(to top, #2e1753, #1f1746, #131537, #0d1028, #050819);
     display:flex;
-    justify-content:center;
     overflow:hidden;
 }
 .text{

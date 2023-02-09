@@ -26,7 +26,6 @@
         <a href="/" class="logo"><i class="fas fa-home"></i></a>
         <div class="hoverLink">
             <a href="/logout" class="icon"><i class="fa-solid fa-door-open"></i></a>
-                
             <p class="hidden">Logout</p>
         </div>';
         }
@@ -74,14 +73,14 @@ if (isset($_SESSION["user"])) {
         <div id="recherche">
         <div class="wrap">
             <div class="search">
-                <input type="search" id="searchByWords" class="searchTerm" placeholder="Recherche un article">
+                <label for="searchByWords"><input type="search" id="searchByWords" class="searchTerm" placeholder="Recherche un article"></label>
              </div>
             <div class="resultByWords"></div>
         </div>
 
         <div class="wrap">
             <div class="search">
-                <input type="search" id="searchByPseudo" class="searchTerm" placeholder="Recherche une personne">
+                <label for="searchByPseudo"><input type="search" id="searchByPseudo" class="searchTerm" placeholder="Recherche une personne"></label>
              </div>
             <div class="resultByPseudo"></div>
         </div>

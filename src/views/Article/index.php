@@ -1,14 +1,13 @@
 <?php
 ob_start();
 ?>
-
     <section class="dashboard">
         <div class="blockAllList" id="masonry">
             <div id="Titre">
                 <div class="effetneon">
                     <span>RealDream</span>
                 </div>
-                <img src="/image/saturne.png" alt="">
+                <img src="/image/saturne.png" alt="imageSaturne">
             </div>
             <?php
             foreach ($articles as $article) {
@@ -28,7 +27,7 @@ ob_start();
                                 if (isset($_SESSION["user"])){?>
                             <form action="/dashboard/<?php echo escape($article->getId_article());?>/like/" method="post">
 
-                                <input type="hidden" name="IDARTICLE" value="<?php echo escape($article->getId_article()); ?>">
+                                <input type="hidden" name="idArticle" value="<?php echo escape($article->getId_article()); ?>">
 
                                     <button class="like"><i class="fa-regular fa-heart"></i></button>
                                     <?php
@@ -40,7 +39,7 @@ ob_start();
                             if (isset($_SESSION["user"])){?>
                             <form action="/dashboard/<?php echo escape($article->getId_article());?>/unLike/" method="post">
 
-                                <input type="hidden" name="IDARTICLE" value="<?php echo escape($article->getId_article()); ?>">
+                                <input type="hidden" name="idArticle" value="<?php echo escape($article->getId_article()); ?>">
 
 
                                     <button class="like"><i class="fa-solid fa-heart"></i></button>
@@ -84,7 +83,7 @@ ob_start();
                         <div class="top">
                             <?php
                             if (!empty($article->getPhoto())) { ?>
-                                <p><img src="image/<?php echo escape($article->getPhoto()); ?>"></p>
+                                <p><img src="image/<?php echo escape($article->getPhoto()); ?>" alt="photoArticle"></p>
                                 <?php
                             }
                             ?>
@@ -94,7 +93,9 @@ ob_start();
                         </div>
                         <?php if (isset($_SESSION["user"])) { ?>
                             <input type="hidden" value="<?php echo escape($article->getId_article()); ?>" id="IdArticleCommente">
-                            <textarea name="texte" rows="2" cols="40" placeholder="Commentaire de l'article" id="texteCommentaire"><?php echo old("texte");?></textarea>
+                            <label for="texteCommentaire">
+                                <textarea name="texte" rows="2" cols="40" placeholder="Commentaire de l'article" id="texteCommentaire"><?php echo old("texte");?></textarea>
+                            </label>
                             <br>
                             <p align="right" class="postCommentaire"><button>Poster le commentaire</button></p>
                             <?php
@@ -108,7 +109,7 @@ ob_start();
                 if (COUNT($article->getCommentaires()) > 0) {
                     foreach ($article->getCommentaires() as $commentaire) {
                         ?>
-                        <div id="divcommentaires"></div>
+                        <div id="divCommentaires"></div>
                         <div class="blockCard">
                                    <div class="cardComment">
 
@@ -155,7 +156,7 @@ ob_start();
             ?>
         </div>
     </section>
-    <script  src="/js/commentaire.js"></script>
+    <script src="/js/commentaire.js"></script>
 <?php
 $content = ob_get_clean();
 require VIEWS . 'layout.php';

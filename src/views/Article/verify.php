@@ -2,7 +2,6 @@
 ob_start();
 ?>
     <section class="dashboard">
-
         <div class="blockAllList" id="masonry">
             <?php
             foreach ($articles as $article) {
@@ -25,18 +24,17 @@ ob_start();
                             </form>
 
                             <form action="/dashboard/verify/agree" method="post">
-                                <input type="hidden" name="IDARTICLE" value="<?php echo escape($article->getId_article()); ?>">
+                                <input type="hidden" name="idArticle" value="<?php echo escape($article->getId_article()); ?>">
                                 <button class='button btn-danger' type='submit'>
                                     <i class="fa-solid fa-check"></i>
                                     <span>Agree</span></button>
                             </form>
-                            </p>
                         </div>
 
                         <div class="top">
                             <?php
                             if (!empty($article->getPhoto())) { ?>
-                                <p><img src="image/<?php echo escape($article->getPhoto()); ?>"></p>
+                                <p><img src="image/<?php echo escape($article->getPhoto()); ?>" alt="imageArticle"></p>
                                 <?php
                             }
                             ?>

@@ -12,14 +12,14 @@ ob_start();
                     <div class="card">
                         <div class="top">
                             <form action="/dashboard/doneModif" method="post">
-                                <p><textarea name="Titre" id="" cols="20" rows="1"><?php echo escape($article->getTitre()); ?></textarea>
+                                <p><label for="titreModif"><textarea name="Titre" id="titreModif" cols="20" rows="1"><?php echo escape($article->getTitre()); ?></textarea></label>
                                     (posté
                                     <?php
                                     $date = new DateTimeImmutable(escape($article->getDate()));
                                     echo $date->format('D d M Y');
                                     ?> par <?php echo escape($article->getPseudoUser()); ?> )</p>
                                 <p>
-                                    <input type="hidden" value="<?php echo escape($article->getId_article()); ?>" name="IDARTICLE">
+                                    <input type="hidden" value="<?php echo escape($article->getId_article()); ?>" name="idArticle">
                                     <button class="button btn-danger" type="submit">
                                         <i class="fa-solid fa-check"></i>
                                         <span>Validé</span></button>
@@ -27,17 +27,16 @@ ob_start();
                         <div class="top">
                             <?php
                             if (!empty($article->getPhoto())) { ?>
-                                <p><img src="image/<?php echo escape($article->getPhoto()); ?>" name="image"></p>
+                                <p><img src="image/<?php echo escape($article->getPhoto()); ?>" name="image" alt="imageArticle"></p>
                                 <?php
                             }
                             ?>
                         </div>
                         <div id="modif">
-                            <textarea name="Texte" id="" cols="80" rows="10" ><?php echo escape($article->getTexte());?></textarea>
+                            <label for="texteModif"><textarea name="Texte" id="texteModif" cols="80" rows="10" ><?php echo escape($article->getTexte());?></textarea></label>
                         </div>
                     </div>
                 </div>
-                </form>
                 <?php
             }
             ?>
