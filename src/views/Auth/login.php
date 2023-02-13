@@ -2,10 +2,9 @@
 ob_start();
 ?>
 <h1><i class="fas fa-solid fa-user logoPage"></i>Identification</h1>
-    <section class="formLogin">
+    <section id="sectionLogin">
         <h2>S'identifier</h2>
-        <div class="separateur"></div>
-        <form action="/login/" method="post">
+        <form action="/login/" method="post" id="formLogin">
 
             <div class="blockInput">
                 <div class="labelInput">
@@ -25,7 +24,7 @@ ob_start();
                 <span class="error"><?php echo error("message");?></span>
             </div>
 
-            <button type="submit" name="button">S'identifier</button>
+            <button type="submit" name="button" id="submitLogin">S'identifier</button>
         </form>
     </section>
 

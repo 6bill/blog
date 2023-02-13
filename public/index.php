@@ -18,7 +18,7 @@ $router->get('/notify', "ArticleController@showNotify");
 $router->get('/dashboard/edit/', "ArticleController@showUpdate");
 $router->get('/article/:article/', "ArticleController@showArticleOne");
 $router->get('/article/:IdArticle/modify', "ArticleController@showModify");
-$router->get('/articleUser/:user/', "ArticleController@showArticlesUser");
+    $router->get('/articleUser/:user/', "ArticleController@showArticlesUser");
 
 $router->post('/dashboard/nouveau/', "ArticleController@store");
 $router->post('/dashboard/:article/delete/', "ArticleController@delete");

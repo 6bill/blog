@@ -9,7 +9,7 @@ ob_start();
             <div class="top">
                 <p>Ajouter un article</p>
             </div>
-            <div class="separateur"></div>
+            <div class="separator"></div>
             <div class="bottom">
                 <form action="/dashboard/nouveau" method="post" enctype='multipart/form-data'>
                     <input type="text" name="name" value="<?php echo old("name");?>" placeholder="Titre de l'article">

@@ -12,6 +12,7 @@ class Article
     protected $Photo;
     protected $Texte;
     protected $Id_user;
+
     public function getId_article()
     {
         return $this->Id_article;
@@ -80,7 +81,6 @@ class Article
 
         return $user->getPseudo();
     }
-
 
     //faux getter pour récupérer les commentaires de l'article
     public function getCommentaires()

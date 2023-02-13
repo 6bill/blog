@@ -137,7 +137,6 @@ class ArticleController
     {
         $articles = $this->manager->getArticle($slug);
         require VIEWS . 'Article/index.php';
-
     }
     /** Affichage des articles **/
     public function showAll()

@@ -15,21 +15,34 @@ body {
 }
 
 header {
+    background-color: midnightblue;
     width: 100%;
     position: sticky;
     top: 0;
+    padding: 5px;
 }
 
 nav {
-    background-color: rgb(38, 15, 68);
     color: white;
     display: flex;
     align-items: center;
 }
-
+#titreArticle{
+    font-size: 20px;
+    margin: 20px;
+    text-align: center;
+}
+#photoLike{
+    display: flex;
+    margin: 15px;
+    justify-content: center;
+}
 nav a {
     display: block;
     color: white;
+}
+#formLike{
+    width: 0;
 }
 
 nav>*:not(#welcome, .searchArticle, .searchPseudo, .resultByWordsArticle, .resultByWordsPseudo, #search) {
@@ -44,18 +57,22 @@ nav>*:not(#welcome, .searchArticle, .searchPseudo, .resultByWordsArticle, .resul
     justify-content: space-evenly;
     margin: auto;
 }
-.resultByWordsArticle{
+.resultByWordsPseudo a:hover,  .resultByWordsArticle a:hover{
+    background-color: blueviolet;
+}
+.resultByWordsPseudo a, .resultByWordsArticle a{
+    color: white;
+    border: 1px solid white;
+    padding: 15px;
+    margin: auto;
+    width: 100%;
+    text-align: center;
+}
+.resultByWordsPseudo, .resultByWordsArticle{
     display: flex;
     justify-content: space-evenly;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
     margin: auto;
-    width: 60%;
-}
-.resultByWordsArticle a{
-    margin: auto;
+    padding: 5px;
 }
 nav a.logo {
     border-radius: 100%;
@@ -155,378 +172,15 @@ main {
     border: 1px solid white;
     cursor: pointer;
 }
-.formLogin {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #013a6b;
-    color: white;
-    border-radius: 15px;
-    margin: auto;
-}
-
-.formLogin h1 {
-    margin: 20px 0;
-    text-align: center;
-}
-
-.formLogin .separator {
-    border-top: 4px solid white;
-    border-radius: 100%;
-    width: 85%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.formLogin form {
-    width: 100%;
-    margin: 25px 0;
-    padding: 0 50px;
-}
-
-.formLogin .blockInput {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
-}
-
-.formLogin .labelInput {
-    display: flex;
-    flex-direction: row;
-}
-
-.formLogin .error {
-    color: red;
-    font-weight: bold;
-}
-
-.formLogin .labelInput label {
-    color: #052659ff;
-    padding: 0 8px;
-    background-color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-top-left-radius: 15px;
-    border-bottom-left-radius: 15px;
-}
-
-.formLogin .labelInput input {
-    display: flex;
-    color: #052659ff;
-    flex-grow: 1;
-    border: none;
-    padding: 8px;
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
-}
-
-.formLogin .labelInput input::placeholder {
-    color: #052659ff;
-}
-
-.formLogin .labelInput input.inputPassword {
-    border-radius: 0;
-}
-
-.formLogin .labelInput .viewPassword {
-    background-color: white;
-    border: none;
-    color: #052659ff;
-    padding: 0 8px;
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
-}
-
-.formLogin .labelInput .viewPassword>i {
-    font-size: 15px;
-}
-
-.formLogin .focus label {
-    color: white;
-    border-left: 1px solid white;
-    border-top: 1px solid white;
-    border-bottom: 1px solid white;
-    background-color: #052659ff;
-}
-
-.formLogin .focus input {
-    border-top: 1px solid white;
-    border-bottom: 1px solid white;
-    border-right: 1px solid white;
-    color: white;
-    background-color: #052659ff;
-}
-
-.formLogin .focus input.inputPassword {
-    border-top: 1px solid white;
-    border-bottom: 1px solid white;
-    border-right: 0;
-}
-
-.formLogin .focus input::placeholder {
-    color: white;
-}
-
-.formLogin .focus .viewPassword {
-    border-top: 1px solid white;
-    border-bottom: 1px solid white;
-    border-right: 1px solid white;
-    color: white;
-    background-color: #052659ff;
-}
-
-.formLogin form>button {
-    background-color: white;
-    color: #052659ff;
-    border: 1px solid #052659ff;
-    border-radius: 15px;
-    cursor: pointer;
-    padding: 8px 13px;
-    transition: all .5s ease;
-}
-
-.formLogin form>button:hover, .formLogin form>button:focus {
-    background-color: #052659ff;
-    color: white;
-    border: 1px solid white;
-    transition: all .5s ease;
-}
-
-.formLogin .more {
-    width: 100%;
-    padding: 0 30px;
-    margin-bottom: 15px;
-}
-
-.formLogin .more a {
-    color: white;
-}
-
-/* CSS Form Register */
-.formRegister {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #013a6b;
-    color: white;
-    border-radius: 15px;
-    margin: auto;
-}
-
-.formRegister h1 {
-    margin: 20px 0;
-    text-align: center;
-}
-
-.formRegister .separator {
-    border-top: 4px solid white;
-    border-radius: 100%;
-    width: 85%;
-}
-
-.formRegister form {
-    width: 100%;
-    margin: 25px 0;
-    padding: 0 50px;
-}
-
-.formRegister form .line {
-    display: flex;
-    justify-content: space-around;
-}
-
-.formRegister .blockInput {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
-}
-
-.formRegister .labelInput {
-    display: flex;
-    flex-direction: row;
-}
-
-.formRegister .error {
-    color: red;
-    font-weight: bold;
-}
-
-.formRegister .labelInput label {
-    color: #052659ff;
-    padding: 0 8px;
-    background-color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-top-left-radius: 15px;
-    border-bottom-left-radius: 15px;
-}
-
-.formRegister .labelInput input {
-    display: flex;
-    color: #052659ff;
-    flex-grow: 1;
-    border: none;
-    padding: 8px;
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
-}
-
-.formRegister .labelInput input::placeholder {
-    color: #052659ff;
-}
-
-.formRegister .labelInput input.inputPassword {
-    border-radius: 0;
-}
-
-.formRegister .labelInput .viewPassword {
-    background-color: white;
-    border: none;
-    color: #052659ff;
-    padding: 0 8px;
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
-}
-
-.formRegister .labelInput .viewPassword>i {
-    font-size: 15px;
-}
-
-.formRegister .focus label {
-    color: white;
-    border-left: 1px solid white;
-    border-top: 1px solid white;
-    border-bottom: 1px solid white;
-    background-color: #052659ff;
-}
-
-.formRegister .focus input {
-    border-top: 1px solid white;
-    border-bottom: 1px solid white;
-    border-right: 1px solid white;
-    color: white;
-    background-color: #052659ff;
-}
-
-.formRegister .focus input.inputPassword {
-    border-top: 1px solid white;
-    border-bottom: 1px solid white;
-    border-right: 0;
-}
-
-.formRegister .focus input::placeholder {
-    color: white;
-}
-
-.formRegister .focus .viewPassword {
-    border-top: 1px solid white;
-    border-bottom: 1px solid white;
-    border-right: 1px solid white;
-    color: white;
-    background-color: #052659ff;
-}
-
-.formRegister form>button {
-    background-color: white;
-    color: #052659ff;
-    border: 1px solid #052659ff;
-    border-radius: 15px;
-    cursor: pointer;
-    padding: 8px 13px;
-    transition: all .5s ease;
-}
-
-.formRegister form>button:hover, .formRegister form>button:focus {
-    background-color: #052659ff;
-    color: white;
-    border: 1px solid white;
-    transition: all .5s ease;
-}
-
-.formRegister .more {
-    width: 100%;
-    padding: 0 30px;
-    margin-bottom: 15px;
-}
-
-.formRegister .more a {
-    color: white;
-}
 
 /* CSS page Article */
 section.dashboard {
     flex: 1;
     height: 100%;
 }
-
-section.dashboard .topDashBoard {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-section.dashboard .topDashBoard h1 {
-    color: #052659ff;
-    font-size: 40px;
-}
 a{
     text-decoration: none;
 }
-section.dashboard .topDashBoard a {
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-section.dashboard .cardComment {
-    width: 500px;
-    background-color: #bbf6ec;
-    border-radius: 15px;
-
-}
-
-section.dashboard .topDashBoard a i {
-    border-radius: 100%;
-    font-size: 40px;
-    background-color: white;
-    color: #013a6b;
-    transition: all .5s ease;
-}
-
-section.dashboard .topDashBoard a:hover i {
-    background-color: #013a6b;
-    color: white;
-    font-size: 40px;
-    transition: all .5s ease;
-}
-
-section.dashboard .topDashBoard .buttonAdd {
-    background-color: #013a6b;
-    font-size: 40px;
-    /* border-radius: 100%; */
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-}
-
-section.dashboard .topDashBoard .buttonAdd:hover {
-    color: #013a6b;
-    background-color: white;
-    transition: all .5s ease;
-}
-
-section.dashboard .blockAllList {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-}
-
 section.dashboard .blockCard {
     padding: 10px;
     display: flex;
@@ -539,8 +193,12 @@ section.dashboard .card {
     background-color: #216464;
     border-radius: 15px;
 }
-
-section.dashboard .card .top {
+#texteArticle{
+    border: 2px solid white;
+    padding: 15px;
+    margin:  0 0 15px;
+}
+section.dashboard .card .top:not(#photoLike .top) {
     padding: 15px 25px 5px 25px;
     display: flex;
     flex-direction: column;
@@ -550,16 +208,26 @@ section.dashboard .card .top {
 section.dashboard .card .top>* {
     color: white;
     text-decoration: none;
+    text-align: justify;
 }
 
 section.dashboard .card .top i {
     font-size: 20px;
 }
 
-section.dashboard .card .separator {
-    border-top: 1px solid white;
+.separator {
+    border-top: 2px solid black;
 }
-
+#comment{
+    margin: 15px;
+    color: white;
+}
+#flexComment{
+    display: flex;
+    width: 75%;
+    margin: auto;
+    padding: 15px;
+}
 section.dashboard .card .bottom {
     padding: 15px 25px 25px 25px;
     display: flex;
@@ -569,7 +237,7 @@ section.dashboard .card .bottom {
 }
 
 section.dashboard .card .bottom p {
-    margin: 5px 0px;
+    margin: 5px 0;
 }
 
 section.dashboard .card .bottom .check {
@@ -583,16 +251,6 @@ section.dashboard .card .bottom .check {
 .top:last-of-type{
     text-align: justify;
 }
-#meteo {
-    width:250px;
-    margin-left: auto;
-    margin-right: 0;
-}
-
-#meteo ul {
-    list-style: none;
-}
-
 /* CSS Homepage */
 
 section.homepage>* {
@@ -610,254 +268,18 @@ section.homepage h1 {
 section.homepage p {
     font-size: 20px;
 }
-
-
-/* CSS Form View List */
-.sectionView {
-    padding: 50px 50px;
-    flex: 1;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.sectionView .modal {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 999;
-    background-color: rgba(0, 0, 0, 0.5);
-    width: 100%;
-    height: 100%;
-    display: none;
-    align-items: center;
-    justify-content: center;
-}
-
-.sectionView .modal>div {
-    background-color: #013a6b;
-    width: 50%;
-    padding: 25px;
-    border-radius: 15px;
-}
-
-.sectionView .modal>div p {
-    color: white;
-    margin-bottom: 10px;
-    text-align: center;
-}
-
-.sectionView .modal>div>div {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-}
-
-.sectionView .modal>div>div>button {
-    background-color: white;
-    border: 1px solid #013a6b;
-    color: #013a6b;
-    padding: 10px 15px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all .5s ease;
-}
-
-.sectionView .modal>div>div>button:hover {
-    background-color: #013a6b;
-    border: 1px solid white;
-    color: white;
-    transition: all .5s ease;
-}
-
-.sectionView .modal>div>div>form>button {
-    background-color: white;
-    border: 1px solid #013a6b;
-    color: #013a6b;
-    padding: 10px 15px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all .5s ease;
-}
-
-.sectionView .modal>div>div>form>button:hover {
-    background-color: #013a6b;
-    border: 1px solid red;
-    color: white;
-    transition: all .5s ease;
-}
-
-.viewList {
-    display: flex;
-    flex-direction: column;
-    border-radius: 15px;
-    background-color: #013a6b;
-    min-width: 40%;
-    height: 70%;
-    color: white;
-}
-
-.viewList>.top {
-    width: 100%;
-    height: 15%;
-    padding: 20px 20px 10px 20px;
-}
-
-.viewList #btnDeleteList {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: 10px;
-    color: red;
-    border-radius: 100%;
-    padding: 5px 10px;
-    transition: all .5s ease;
-}
-
-.viewList #btnDeleteList:hover {
-    background-color: #052659ff;
-    transition: all .5s ease;
-    cursor: pointer;
-}
-
-.viewList>.separator {
-    border-top: 4px solid white;
-    width: 100%;
-}
-
-.viewList>.bottom {
-    width: 100%;
-    flex: 1;
-    max-height: calc(100% - (15% - 4px));
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-}
-
-.viewList>.bottom .check {
-    text-decoration: line-through;
-}
-
-.viewList>.bottom>.blockForm {
-    height: 15%;
-    display: flex;
-}
-
-.viewList>.bottom>.blockForm form {
-    height: 60%;
-    width: 100%;
-    display: flex;
-}
-
-.viewList>.bottom>.blockForm span {
-    margin-left: 10px;
-}
-
-.viewList>.bottom>.blockForm form input {
-    flex: 1;
-    background-color: transparent;
-    border: none;
-    padding: 5px 15px;
-    color: white;
-}
-
-.viewList>.bottom>.blockForm form .iconTask {
-    padding: 5px 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.viewList>.bottom>.blockForm form button {
-    margin: 5px;
-    padding: 0 20px;
-    border: none;
-    cursor: pointer;
-    border-radius: 100%;
-    color: white;
-    background-color: transparent;
-    transition: background .5s ease;
-}
-
-.viewList>.bottom>.blockForm form button:hover {
-    background-color: #052659ff;
-    transition: background .5s ease;
-}
-
-.viewList>.bottom>.blockForm form input::placeholder {
-    color: white;
-}
-
-.viewList .blockTask {
-    overflow: auto;
-    max-height: 85%;
-}
-
-.viewList .task {
-    padding: 10px 20px 20px 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.viewList .enleveArticleControllerlist {
-    display: flex;
-    justify-content: space-between;
-    min-height: 36px;
-}
-
-
-.viewList .btnCheckTrue {
-    border: none;
-    background-color: #013a6b;
-    padding: 7px;
-    border-radius: 100%;
-    transition: all .5s ease;
-    cursor: pointer;
-}
-
-.viewList .btnCheckTrue:hover {
-    background-color: green;
-    transition: all .5s ease;
-    border-radius: 100%;
-    transition: all .5s ease;
-}
 #new{
     height: 40px;
 }
 #bell{
     width: 30px;
 }
-.viewList .btnCheckTrue i {
-    font-size: 20px;
-    color: green;
-    transition: all .5s ease;
-}
-
-.viewList .btnCheckTrue:hover i {
-    color: white;
-    transition: all .5s ease;
-}
-
-.viewList .btnCheckFalse {
-    border: none;
-    background-color: #013a6b;
-    padding: 7px 10px;
-    border-radius: 100%;
-    transition: all .5s ease;
-    cursor: pointer;
-}
 #logout{
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
-.viewList .btnCheckFalse:hover {
-    background-color: red;
-    transition: all .5s ease;
-    border-radius: 100%;
-    transition: all .5s ease;
-}
+
 #like{
     color: green;
     font-weight: bold;
@@ -873,138 +295,17 @@ section.homepage p {
 #postCommentaire{
     background-color: green;
     border: 0;
+    color: white;
+    border-radius: 5px;
     padding: 15px 30px;
     cursor: pointer;
-    margin: 15px 0 0 0 ;
-}
-.viewList .btnCheckFalse i {
-    font-size: 20px;
-    color: red;
-    transition: all .5s ease;
-}
-
-.viewList .btnCheckFalse:hover i {
-    color: white;
-    transition: all .5s ease;
-}
-
-.viewList .error {
-    color: red;
-    font-weight: 900;
-    margin-top: 8px;
-}
-
-.viewList .afficheInput {
-    display: flex;
-    min-height: 36px;
-}
-
-.viewList .formEdit {
-    display: flex;
-    justify-content: space-between;
-    flex-grow: 1;
-}
-
-.viewList .formEdit .labelInput {
-    display: flex;
-    flex-grow: 1;
-}
-
-.viewList .formEdit .labelInput label {
-    color: white;
-    padding: 0 8px;
-    display: flex;
-    border-bottom: 1px solid white;
+    margin: 0 auto;
     align-items: center;
+    width: 20%;
+    display: flex;
     justify-content: center;
 }
 
-.viewList .formEdit .labelInput input {
-    display: flex;
-    color: white;
-    border: none;
-    flex-grow: 1;
-    background-color: transparent;
-    border-bottom: 1px solid white;
-    padding: 8px;
-}
-
-.viewList .formEdit .labelInput input::placeholder {
-    color: white;
-}
-
-.viewList .formEdit .focus label {
-    color: white;
-    border-top-left-radius: 5px;
-    padding: 0 8px;
-    display: flex;
-    border-bottom: 1px solid white;
-    align-items: center;
-    background-color: #052659ff;
-    justify-content: center;
-}
-
-.viewList .formEdit .focus input {
-    display: flex;
-    color: white;
-    border: none;
-    flex-grow: 1;
-    background-color: #052659ff;
-    border-bottom: 1px solid white;
-    padding: 8px;
-}
-
-.viewList .formEdit .focus input::placeholder {
-    color: white;
-}
-
-.viewList .formEdit button {
-    border: none;
-    border-bottom: 1px solid white;
-    background-color: transparent;
-    width: 35px;
-    color: white;
-    border-top-right-radius: 5px;
-    cursor: pointer;
-    transition: all .5s ease;
-}
-
-.viewList .formEdit button:hover {
-    background-color: rgba(38, 89, 255, 0.19);
-    transition: all .5s ease;
-}
-
-.viewList .formDelete {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-left: 15px;
-}
-
-.viewList .formDelete button {
-    background-color: transparent;
-    border-radius: 100%;
-    border: none;
-    padding: 5px;
-    width: 35px;
-    height: 35px;
-    cursor: pointer;
-    transition: all .5s ease;
-}
-
-.viewList .formDelete button:hover {
-    background-color: #052659ff;
-    transition: all .5s ease;
-}
-
-.viewList .formDelete button i {
-    font-size: 20px;
-    color: red;
-}
-
-.viewList .hiddenEdit {
-    display: none;
-}
 
 /* CSS create */
 section.create {
@@ -1039,7 +340,36 @@ section.create h1 {
 .searchTerm:focus{
     color: #00B4CC;
 }
-
+#formLogin{
+    background-color: #216464;
+    padding: 30px;
+    width: 24vw;
+    border-radius: 15px;
+}
+#submitLogin{
+    border-radius: 5px;
+    border: 0;
+    padding: 10px 20px;
+    display: block;
+    margin: auto;
+    cursor: pointer;
+}
+#sectionLogin{
+    margin: auto;
+}
+.labelInput{
+    width: 100%;
+}
+.blockInput{
+    margin: 15px auto;
+    width: 100%;
+}
+.blockInput input{
+    width: 75%;
+    border-radius: 3px;
+    padding: 5px;
+    border: 0;
+}
 .searchButton {
     width: 40px;
     height: 36px;
@@ -1073,7 +403,7 @@ section.create .list {
 section.create .list .top {
     width: 100%;
     padding: 20px 20px 10px 20px;
-    color:white;
+    color: white;
 }
 
 section.dashboard h1{
@@ -1081,7 +411,11 @@ section.dashboard h1{
     display: flex;
     align-items: center;
 }
-
+.cardComment{
+    background-color: cornflowerblue;
+    padding: 15px;
+    border-radius: 15px;
+}
 section.create form input {
     height: 30px;
     background-color: transparent;
@@ -1095,16 +429,6 @@ section.create form input::placeholder {
     color: white;
 }
 
-section.create form button {
-    padding: 10px 10px;
-    background-color: transparent;
-    border: none;
-    color: white;
-    border-radius: 100%;
-    cursor: pointer;
-    transition: background .5s ease;
-}
-
 section.create form button:hover {
     background-color: #052659ff;
     transition: background .5s ease;
@@ -1112,11 +436,6 @@ section.create form button:hover {
 
 section.create .list .top .error,section.create .list .bottom .error {
     color: red;
-}
-
-section.create .list .separator {
-    border-top: 4px solid white;
-    width: 100%;
 }
 
 section.create .list .bottom {
@@ -1142,7 +461,6 @@ section.create .list .bottom {
 #imgEdit{
     width: 20px;
 }
-/* CSS page 404 */
 
 section.error {
     margin: 50px;
@@ -1167,8 +485,29 @@ section.error {
 }
 #texteCommentaire{
     color: black;
+    width: 80%;
+    padding: 15px;
+    display: block;
 }
-
+#delete{
+    cursor: pointer;
+    background-color: red;
+    border: 0;
+    width: 50px;
+    margin: 15px auto 0;
+}
+#edit{
+    display: flex;
+    align-items: center;
+    padding: 5px 15px;
+    background-color: cornflowerblue;
+}
+#formDeleteEdit{
+    display: flex;
+}
+#trash{
+    width: 50px!important;
+}
 .is_animating {
     animation: heart-burst .8s steps(28) 1;
 }
@@ -1235,7 +574,7 @@ section.error a {
 
     main {
         margin-top: 60px;
-        margin-left: 0px;
+        margin-left: 0;
 
     }
 

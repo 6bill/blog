@@ -52,16 +52,18 @@
                 <label for="searchByWordsPseudo"></label>
                 <input type="search" class="searchTerm" id="searchByWordsPseudo" placeholder="Cherchez un utilisateur">
             </div>
-            <div class="resultByWordsPseudo">
-            </div>
             <div class="searchArticle">
                 <label for="searchByWordsArticle"></label>
                 <input type="search" class="searchTerm" id="searchByWordsArticle" placeholder="Cherchez un article">
             </div>
-            <div class="resultByWordsArticle">
-            </div>
         </div>
+
+
     </nav>
+    <div class="resultByWordsArticle">
+    </div>
+    <div class="resultByWordsPseudo">
+    </div>
 </header>
 
 <main>

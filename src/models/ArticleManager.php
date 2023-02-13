@@ -21,24 +21,21 @@ class ArticleManager
     {
         if ($_SESSION["user"]["role"] == "admin") {
             $stmt = $this->bdd->prepare("INSERT INTO article(Titre, Date, Photo, Texte, Id_user, validation) VALUES (?, NOW(), ?, ?, ?,'oui')");
-        }else {
+        } else {
             $stmt = $this->bdd->prepare("INSERT INTO article(Titre, Date, Photo, Texte, Id_user, validation) VALUES (?, NOW(), ?, ?, ?, ?)");
         }
-            $retour = $stmt->execute(array(
-                $_POST["name"],
-                $_FILES["photo"]["name"],
-                $_POST["texte"],
-                $_SESSION["user"]["id"]
-            ));
-
-            return $retour;
-
+        $retour = $stmt->execute(array(
+            $_POST["name"],
+            $_FILES["photo"]["name"],
+            $_POST["texte"],
+            $_SESSION["user"]["id"]
+        ));
+        return $retour;
     }
-
     /** Enregistrement d'un commentaire **/
     public function storeCommentaire($commentaire, $IdArticleCommente)
     {
-        $titre = "Commentaire posté le  par " . $_SESSION["user"]["pseudo"];
+        $titre = "Commentaire posté par " . $_SESSION["user"]["pseudo"];
         $stmt = $this->bdd->prepare("INSERT INTO article(Titre, Date, Texte, Id_user,IdArticleCommente ) VALUES (?, NOW(), ?, ?, ?)");
         $stmt->execute(array(
             $titre,
@@ -63,7 +60,6 @@ class ArticleManager
     /** Récupération de tous les articles **/
     public function getNotify()
     {
-
         $stmt = $this->bdd->prepare('SELECT * FROM article WHERE IdArticleCommente IS NULL AND validation = ?');
         $stmt->execute(array(
             "non"
