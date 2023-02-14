@@ -254,7 +254,7 @@ section.dashboard .card .bottom .check {
 /* CSS Homepage */
 
 section.homepage>* {
-    color: #052659ff;
+    color: midnightblue;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -284,6 +284,7 @@ section.homepage p {
     color: green;
     font-weight: bold;
     font-size: 25px;
+    text-align: center;
 }
 
 #error{
@@ -291,8 +292,9 @@ section.homepage p {
     font-size: 25px;
     color: red;
     margin: auto;
+    text-align: center;
 }
-#postCommentaire{
+.postCommentaire{
     background-color: green;
     border: 0;
     color: white;
@@ -301,20 +303,35 @@ section.homepage p {
     cursor: pointer;
     margin: 0 auto;
     align-items: center;
-    width: 20%;
+    width: 35%;
     display: flex;
     justify-content: center;
 }
-
-
-/* CSS create */
-section.create {
-    flex: 1;
-    height: 100%;
+#deleteCommentaire{
+    cursor: pointer;
+    background-color: transparent;
+    border: 0;
+    margin: 5px;
+}
+.cardComment p, h3{
+    margin: 10px;
+    color: white;
+    text-align: center;
+}
+#formDeleteCommentaire{
+    display: flex;
+    justify-content: center;
+}
+.homepage article{
     display: flex;
     flex-direction: column;
 }
-
+.homepage article h2{
+    margin: 15px;
+    font-size: 30px;
+    text-align: center;
+}
+/* CSS create */
 section.create h1 {
     font-size: 35px;
     display: flex;
@@ -336,15 +353,25 @@ section.create h1 {
     color: #9DBFAF;
     margin-right: 15px;
 }
-
+h1{
+    font-size: 32px;
+}
 .searchTerm:focus{
     color: #00B4CC;
 }
 #formLogin{
-    background-color: #216464;
-    padding: 30px;
+    background-color: royalblue;
     width: 24vw;
     border-radius: 15px;
+    padding: 15px 0;
+    margin: auto;
+}
+#formLogin h2{
+    text-align: center;
+    margin-bottom: 5px;
+}
+#sectionLogin article{
+    padding: 15px 15px 0 15px;
 }
 #submitLogin{
     border-radius: 5px;
@@ -354,15 +381,12 @@ section.create h1 {
     margin: auto;
     cursor: pointer;
 }
-#sectionLogin{
-    margin: auto;
-}
 .labelInput{
     width: 100%;
 }
 .blockInput{
     margin: 15px auto;
-    width: 100%;
+    width: 75%;
 }
 .blockInput input{
     width: 75%;
@@ -381,7 +405,9 @@ section.create h1 {
     cursor: pointer;
     font-size: 20px;
 }
-
+#flexComment input:first-of-type{
+    width: 65%;
+}
 /*Resize the wrap to see the search bar change!*/
 
 section.create>div {
@@ -392,14 +418,21 @@ section.create>div {
 }
 
 section.create .list {
-    min-width: 40%;
-    height: 70%;
+    margin: auto;
+    width: 24vw;
     border-radius: 15px;
-    background-color: #013a6b;
+    background-color: steelblue;
     display: flex;
     flex-direction: column;
 }
-
+#postArticle{
+    margin: auto;
+    padding: 15px;
+    background-color: white;
+    border-radius: 15px;
+    display: block;
+    cursor: pointer;
+}
 section.create .list .top {
     width: 100%;
     padding: 20px 20px 10px 20px;
@@ -424,7 +457,10 @@ section.create form input {
     flex: 1;
     margin-right: 10px;
 }
-
+#CreateComment{
+    border-radius: 10px;
+    padding: 10px;
+}
 section.create form input::placeholder {
     color: white;
 }
@@ -529,7 +565,9 @@ section.error a {
 .cardComment img{
     width: 200px;
 }
-
+.logo{
+    width: 5% !important;
+}
 @media screen and (max-width: 765px) {
     body {
         display: flex;

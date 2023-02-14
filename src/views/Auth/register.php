@@ -3,45 +3,52 @@ ob_start();
 ?>
     <h1><i class="fas fa-solid fa-user logoPage"></i> Création d'un utilisateur :</h1>
 <section id="sectionLogin">
-    <h2>Inscription</h2>
   <form action="/register" method="post" id="formLogin">
+      <h2>Inscription</h2>
+      <div class="separator"></div>
+      <article>
+          <div class="blockInput">
+              <div class="labelInput">
+                  <label for="pseudo"><i class="fas fa-user-tie"></i></label>
+                  <input type="text" id="pseudo" name="pseudo" value="<?php echo old("pseudo"); ?>"
+                         placeholder="pseudo">
+              </div>
+              <span class="error"><?php echo error("pseudo"); ?></span>
+          </div>
 
-    <div class="blockInput">
-      <div class="labelInput">
-        <label for="pseudo"><i class="fas fa-user-tie"></i></label>
-        <input type="text" id="pseudo" name="pseudo" value="<?php echo old("pseudo");?>" placeholder="pseudo">
-      </div>
-      <span class="error"><?php echo error("pseudo");?></span>
-    </div>
+          <div class="blockInput">
+              <div class="labelInput">
+                  <label for="password"><i class="fas fa-key"></i></label>
+                  <input id="password" class="inputPassword" type="password" name="password"
+                         value="<?php echo old("password"); ?>" placeholder="password">
+                  <button id="btnPassword" class="viewPassword" type="button" name="button"><i class="far fa-eye"></i>
+                  </button>
+              </div>
+              <span class="error"><?php echo error("password"); ?></span>
+          </div>
 
-    <div class="blockInput">
-      <div class="labelInput">
-        <label for="password"><i class="fas fa-key"></i></label>
-        <input id="password" class="inputPassword" type="password" name="password" value="<?php echo old("password");?>" placeholder="password">
-        <button id="btnPassword" class="viewPassword" type="button" name="button"><i class="far fa-eye"></i></button>
-      </div>
-      <span class="error"><?php echo error("password");?></span>
-    </div>
+          <div class="blockInput">
+              <div class="labelInput">
+                  <label for="passwordConfirm"><i class="fas fa-key"></i></label>
+                  <input id="passwordConfirm" class="inputPassword" type="password" name="passwordConfirm"
+                         value="<?php echo old("passwordConfirm"); ?>" placeholder="Confirm password">
+                  <button id="btnPasswordConfirm" class="viewPassword" type="button" name="button"><i
+                              class="far fa-eye"></i></button>
+              </div>
+              <span class="error"><?php echo error("passwordConfirm"); ?></span>
+              <span class="error"><?php echo error("confirm"); ?></span>
+          </div>
 
-    <div class="blockInput">
-      <div class="labelInput">
-        <label for="passwordConfirm"><i class="fas fa-key"></i></label>
-        <input id="passwordConfirm" class="inputPassword" type="password" name="passwordConfirm" value="<?php echo old("passwordConfirm");?>" placeholder="Confirm password">
-        <button id="btnPasswordConfirm" class="viewPassword" type="button" name="button"><i class="far fa-eye"></i></button>
-      </div>
-      <span class="error"><?php echo error("passwordConfirm");?></span>
-      <span class="error"><?php echo error("confirm");?></span>
-    </div>
-
-    <div class="blockInput">
-      <div class="labelInput">
-        <label for="role"><i class="fas fa-user-tie"></i></label>
-        <select name="role" id="role">
-            <option value="user">user</option>
-            <option value="admin">admin</option>
-        </select>
-      </div>
-    </div>
+          <div class="blockInput">
+              <div class="labelInput">
+                  <label for="role"><i class="fas fa-user-tie"></i></label>
+                  <select name="role" id="role">
+                      <option value="user">user</option>
+                      <option value="admin">admin</option>
+                  </select>
+              </div>
+          </div>
+      </article>
 
     <button type="submit" name="button" id="submitLogin">Créer l'utilisateur</button>
   </form>

@@ -1,11 +1,11 @@
 <?php
 ob_start();
 ?>
-<h1><i class="fas fa-solid fa-user logoPage"></i>Identification</h1>
     <section id="sectionLogin">
-        <h2>S'identifier</h2>
-        <form action="/login/" method="post" id="formLogin">
-
+        <h1><i class="fas fa-solid fa-user logoPage"></i>Identification</h1>
+        <form action="/login/" method="post" id="formLogin" class="list">
+            <h2>S'identifier</h2>
+            <div class="separator"></div>
             <div class="blockInput">
                 <div class="labelInput">
                     <label for="pseudo"><i class="fas fa-user-tie"></i></label>
@@ -13,7 +13,6 @@ ob_start();
                 </div>
                 <span class="error"><?php echo error("pseudo");?></span>
             </div>
-
             <div class="blockInput">
                 <div class="labelInput">
                     <label for="password"><i class="fas fa-key"></i></label>
@@ -23,7 +22,6 @@ ob_start();
                 <span class="error"><?php echo error("password");?></span>
                 <span class="error"><?php echo error("message");?></span>
             </div>
-
             <button type="submit" name="button" id="submitLogin">S'identifier</button>
         </form>
     </section>
@@ -39,7 +37,6 @@ ob_start();
             }
         };
     </script>
-
 <?php
 
 $content = ob_get_clean();
