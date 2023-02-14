@@ -80,10 +80,10 @@ ob_start();
                         <div class="top">
                             <p id="texteArticle"><?php echo escape($article->getTexte()); ?>
                         </div>
-                        <div class="separator"></div>
                         <?php
                         if (isset($_SESSION["user"])) {
                             ?>
+                            <div class="separator"></div>
                             <article id="comment">
                                 <h3>Poster un commentaire :</h3>
                                 <div id="flexComment" postid="<?php echo $article->getId_article();?>">
@@ -116,13 +116,13 @@ ob_start();
                                 <div class='top padding'>
                                     <p><?php echo escape($commentaire->getTexte()); ?>
                                 </div>
-                                <div class='separator'></div>
                                 <form action='/dashboard/<?php echo escape($commentaire->getId_article()); ?>/delete'
                                       method='post' id='formDeleteCommentaire'>
                                     <?php
                                     if (isset($_SESSION['user'])) {
                                         if ($_SESSION['user']['pseudo'] == escape($commentaire->getPseudoUser()) || $_SESSION['user']['role'] == 'admin') {
                                             ?>
+                                            <div class='separator'></div>
                                             <button class='button btn-danger' type='submit' id='deleteCommentaire'
                                                     onclick='return confirm("Êtes-vous sur de vouloir supprimer ce métier ?")'>
                                                 <img src='/image/trash.png' alt='trash' id='trash'>
