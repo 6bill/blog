@@ -20,17 +20,15 @@ class ArticleManager
     public function store()
     {
         if ($_SESSION["user"]["role"] == "admin") {
-            $stmt = $this->bdd->prepare("INSERT INTO article(Titre, Date, Photo, Texte, Id_user, validation) VALUES (?, NOW(), ?, ?, ?,'oui')");
+            $stmt = $this->bdd->prepare("INSERT INTO article(Titre, Date, Photo, Texte, Id_user, validation ) VALUES (:titre, NOW(), :photo, :texte, :idUser, 'oui')");
         } else {
-            $stmt = $this->bdd->prepare("INSERT INTO article(Titre, Date, Photo, Texte, Id_user, validation) VALUES (?, NOW(), ?, ?, ?, ?)");
+            $stmt = $this->bdd->prepare("INSERT INTO article(Titre, Date, Photo, Texte, Id_user, validation ) VALUES (:titre, NOW(), :photo, :texte, :idUser, ?)");
         }
-        $retour = $stmt->execute(array(
-            $_POST["name"],
-            $_FILES["photo"]["name"],
-            $_POST["texte"],
-            $_SESSION["user"]["id"]
-        ));
-        return $retour;
+        $stmt->bindParam(':titre', $_POST["titre"], PDO::PARAM_STR);
+        $stmt->bindParam(':photo', $_FILES["photo"]["name"], PDO::PARAM_STR);
+        $stmt->bindParam(':texte', $_POST["texte"], PDO::PARAM_STR);
+        $stmt->bindParam(':idUser', $_SESSION["user"]["id"], PDO::PARAM_INT);
+        return  $stmt->execute();
     }
     /** Enregistrement d'un commentaire **/
     public function storeCommentaire($commentaire, $IdArticleCommente)
@@ -46,7 +44,6 @@ class ArticleManager
         $lastId = $this->bdd->lastInsertId();
         return $this->getArticle($lastId);
     }
-
     /** Récupération de tous les articles **/
     public function getAll()
     {
@@ -79,13 +76,11 @@ class ArticleManager
 
     public function validate()
     {
-
         $stmt = $this->bdd->prepare("UPDATE article SET validation =? WHERE Id_article = ?");
-        $retour = $stmt->execute(array(
+        return $stmt->execute(array(
             "oui",
             $_POST['IdArticle']
         ));
-        return $retour;
     }
 
     /** Récupération des commentaires d'un article**/
@@ -132,18 +127,40 @@ class ArticleManager
             $_SESSION["erreur"]="vous aimez déjà cet article";
         }
     }
-
+    public function unLike()
+    {
+        //ON VA CHERCHER DANS LA BASE DE DONNEES SI LE COUPLE EXISTE DEJA
+        $stmt = $this->bdd->prepare('SELECT * FROM `like` WHERE Id_article = ? AND Id_user= ?');
+        $stmt->execute(array(
+            $_POST["Id_article"],
+            $_SESSION['user']['id'],
+        ));
+        //on récupère le résultat dans un tableau
+        $tabLikes = $stmt->fetchAll(\PDO::FETCH_CLASS, "Blog\Models\Like");
+        //SI LE TABLEAU EST VIDE, cela veut dire que le couple n'existe pas
+        //donc on va insérer
+        if (count($tabLikes) == 0) {
+            $stmt = $this->bdd->prepare("INSERT INTO `like` (Id_article, Id_user) VALUES(?, ?) ");
+            $stmt->execute(array(
+                $_POST["Id_article"],
+                $_SESSION['user']['id'],
+            ));
+            $_SESSION["like"]="Article aimé";
+        }
+        else{
+            $_SESSION["erreur"]="vous aimez déjà cet article";
+        }
+    }
     public function update()
     {
         $stmt = $this->bdd->prepare("UPDATE article SET Titre = ?, Photo = ?, Texte = ?, Id_user = ? Where Id_article = ? and IdArticleCommente is null");
-        $retour = $stmt->execute(array(
+        return $stmt->execute(array(
             $_POST["titre"],
             $_POST['photo'],
             $_POST["texte"],
             $_SESSION['user']['id'],
             $_POST["IdArticle"]
         ));
-        return $retour;
     }
 
     public function getArticleByWords()
@@ -154,7 +171,6 @@ class ArticleManager
         ));
         return $stmt->fetchAll(\PDO::FETCH_CLASS, "Blog\Models\Article");
     }
-
 
     /** Récupération des articles à partir d'un id user*/
     public function getArticlesByUser($idUser)

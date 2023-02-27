@@ -28,7 +28,7 @@
                     <p class="hidden">Créer un utilisateur</p></a>
                 </div>
                 <div class="hoverLink">
-                    <a href="/notify/" class="icon"><img src="../image/bell.png" alt="notify" id="bell">
+                    <a href="/notify/" class="icon"><img src="../../image/bell.png" alt="notify" id="bell">
                     <p class="hidden">Notifications</p></a>
                 </div>';
                 }

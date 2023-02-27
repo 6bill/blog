@@ -407,6 +407,7 @@ h1{
 }
 #flexComment input:first-of-type{
     width: 65%;
+    padding-left: 10px;
 }
 /*Resize the wrap to see the search bar change!*/
 

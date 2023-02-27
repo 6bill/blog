@@ -1,7 +1,6 @@
 <?php
 ob_start();
 ?>
-
     <section class="dashboard">
         <h1><i class="fas fa-list-alt logoPage"></i> Liste des articles :</h1>
         <div class="blockAllList" id="masonry">
@@ -90,8 +89,7 @@ ob_start();
                                     <label for="texteCommentaire<?php echo $article->getId_article();?>"></label>
                                     <input type="text" id="texteCommentaire<?php echo $article->getId_article();?>" placeholder="new comment" name="texte"
                                            required>
-                                    <input type="hidden" id="IdArticleCommente" name="IdArticleCommente"
-                                           value="<?php echo escape($article->getId_article()); ?>" required>
+                                    <input type="hidden" id="IdArticleCommente" name="IdArticleCommente" value="<?php echo escape($article->getId_article()); ?>" required>
                                     <label for="imageComment"></label>
                                     <button type="submit" class="postCommentaire">Envoyer</button>
                                 </div>
@@ -143,7 +141,6 @@ ob_start();
             ?>
         </div>
     </section>
-
 <?php
 $content = ob_get_clean();
 require VIEWS . 'layout.php';

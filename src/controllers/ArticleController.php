@@ -142,6 +142,10 @@ class ArticleController
         $this->manager->like();
         header("Location: /dashboard");
     }
+    public function unLike(){
+        $this->manager->unLike();
+        header("Location: /dashboard");
+    }
     public function showArticlesUser($idUser)
     {
         $articles = $this->manager->getArticlesByUser($idUser);
