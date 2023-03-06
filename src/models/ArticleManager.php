@@ -8,21 +8,21 @@ use Blog\models\UserManager;
 /** Class ArticleManager **/
 class ArticleManager
 {
-    private $bdd;
+    private $connexion;
 
     public function __construct()
     {
-        $this->bdd = new \PDO('mysql:host=' . HOST . ';dbname=' . DATABASE . ';charset=utf8;', USER, PASSWORD);
-        $this->bdd->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+        $this->connexion = new \PDO('mysql:host=' . HOST . ';dbname=' . DATABASE . ';charset=utf8;', USER, PASSWORD);
+        $this->connexion->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
     }
 
     /** Enregistrement de l'article **/
     public function store()
     {
         if ($_SESSION["user"]["role"] == "admin") {
-            $stmt = $this->bdd->prepare("INSERT INTO article(Titre, Date, Photo, Texte, Id_user, validation ) VALUES (:titre, NOW(), :photo, :texte, :idUser, 'oui')");
+            $stmt = $this->connexion->prepare("INSERT INTO article(Titre, Date, Photo, Texte, Id_user, validation ) VALUES (:titre, NOW(), :photo, :texte, :idUser, 'oui')");
         } else {
-            $stmt = $this->bdd->prepare("INSERT INTO article(Titre, Date, Photo, Texte, Id_user, validation ) VALUES (:titre, NOW(), :photo, :texte, :idUser, ?)");
+            $stmt = $this->connexion->prepare("INSERT INTO article(Titre, Date, Photo, Texte, Id_user, validation ) VALUES (:titre, NOW(), :photo, :texte, :idUser, ?)");
         }
         $stmt->bindParam(':titre', $_POST["titre"], PDO::PARAM_STR);
         $stmt->bindParam(':photo', $_FILES["photo"]["name"], PDO::PARAM_STR);
@@ -34,49 +34,87 @@ class ArticleManager
     public function storeCommentaire($commentaire, $IdArticleCommente)
     {
         $titre = "Commentaire posté par " . $_SESSION["user"]["pseudo"];
-        $stmt = $this->bdd->prepare("INSERT INTO article(Titre, Date, Texte, Id_user,IdArticleCommente ) VALUES (?, NOW(), ?, ?, ?)");
+        $stmt = $this->connexion->prepare("INSERT INTO article(Titre, Date, Texte, Id_user,IdArticleCommente ) VALUES (?, NOW(), ?, ?, ?)");
         $stmt->execute(array(
             $titre,
             $commentaire,
             $_SESSION["user"]["id"],
             $IdArticleCommente
         ));
-        $lastId = $this->bdd->lastInsertId();
+        $lastId = $this->connexion->lastInsertId();
         return $this->getArticle($lastId);
     }
     /** Récupération de tous les articles **/
+    /** Récupération de tous les articles **/
     public function getAll()
     {
-        $stmt = $this->bdd->prepare('SELECT * FROM article WHERE IdArticleCommente IS NULL AND validation = ?');
-        $stmt->execute(array(
-            "oui"
-        ));
-        return $stmt->fetchAll(\PDO::FETCH_CLASS, "Blog\Models\Article");
+        $stmt = $this->connexion->prepare('SELECT * FROM article WHERE IdArticleCommente IS NULL AND validation = ?');
+        try {
+            //ON MET L'INSTRUCTION DANS UN TRY
+            $stmt->execute(array("oui"));
+        } catch (\Exception $e) {
+        //ON RECUPERE LES EVENTUELLES ERREURS SYSTEME
+        //On stocke chaque détail de l'erreur dans des variables
+        $FichierErreur = "Fichier erroné :" . $e->getFile();
+        $numLigne = "<br><br>numéro ligne :" . $e->getLine();
+        $messageErreur = "<br><br>code erreur et message :" . $e->getMessage();
+        //On concatène les erreurs dans un string que l'on met en session
+        $_SESSION["exception"] = $FichierErreur . $numLigne . $messageErreur;
+        } finally {
+            //IL FAUT TOUJOURS FERMER UNE CONNEXION
+            $this->connexion = null;
+            //ON RENVOIE L'ARRAY D'ARTICLES AU CONTROLLER
+            return $stmt->fetchAll(\PDO::FETCH_CLASS, "Blog\Models\Article");
+        }
     }
-
     /** Récupération de tous les articles **/
     public function getNotify()
     {
-        $stmt = $this->bdd->prepare('SELECT * FROM article WHERE IdArticleCommente IS NULL AND validation = ?');
-        $stmt->execute(array(
-            "non"
-        ));
-        return $stmt->fetchAll(\PDO::FETCH_CLASS, "Blog\Models\Article");
+        $stmt = $this->connexion->prepare('SELECT * FROM article WHERE IdArticleCommente IS NULL AND validation = ?');
+        try {
+            //ON MET L'INSTRUCTION DANS UN TRY
+            $stmt->execute(array("non"));
+        } catch (\Exception $e) {
+            //ON RECUPERE LES EVENTUELLES ERREURS SYSTEME
+            //On stocke chaque détail de l'erreur dans des variables
+            $FichierErreur = "Fichier erroné :" . $e->getFile();
+            $numLigne = "<br><br>numéro ligne :" . $e->getLine();
+            $messageErreur = "<br><br>code erreur et message :" . $e->getMessage();
+            //On concatène les erreurs dans un string que l'on met en session
+            $_SESSION["exception"] = $FichierErreur . $numLigne . $messageErreur;
+        } finally {
+            //IL FAUT TOUJOURS FERMER UNE CONNEXION
+            $this->connexion = null;
+            //ON RENVOIE L'ARRAY D'ARTICLES AU CONTROLLER
+            return $stmt->fetchAll(\PDO::FETCH_CLASS, "Blog\Models\Article");
+        }
     }
-
     /** Récupération de l'article à partir de son id**/
     public function getArticle($id)
     {
-        $stmt = $this->bdd->prepare('SELECT * FROM article WHERE Id_article = ?');
-        $stmt->execute(array(
-            $id
-        ));
-        return $stmt->fetchAll(\PDO::FETCH_CLASS, "Blog\Models\Article");
+        $stmt = $this->connexion->prepare('SELECT * FROM article WHERE Id_article = ?');
+        try {
+            //ON MET L'INSTRUCTION DANS UN TRY
+            $stmt->execute(array($id));
+        } catch (\Exception $e) {
+            //ON RECUPERE LES EVENTUELLES ERREURS SYSTEME
+            //On stocke chaque détail de l'erreur dans des variables
+            $FichierErreur = "Fichier erroné :" . $e->getFile();
+            $numLigne = "<br><br>numéro ligne :" . $e->getLine();
+            $messageErreur = "<br><br>code erreur et message :" . $e->getMessage();
+            //On concatène les erreurs dans un string que l'on met en session
+            $_SESSION["exception"] = $FichierErreur . $numLigne . $messageErreur;
+        } finally {
+            //IL FAUT TOUJOURS FERMER UNE CONNEXION
+            $this->connexion = null;
+            //ON RENVOIE L'ARRAY D'ARTICLES AU CONTROLLER
+            return $stmt->fetchAll(\PDO::FETCH_CLASS, "Blog\Models\Article");
+        }
     }
 
     public function validate()
     {
-        $stmt = $this->bdd->prepare("UPDATE article SET validation =? WHERE Id_article = ?");
+        $stmt = $this->connexion->prepare("UPDATE article SET validation =? WHERE Id_article = ?");
         return $stmt->execute(array(
             "oui",
             $_POST['IdArticle']
@@ -86,7 +124,7 @@ class ArticleManager
     /** Récupération des commentaires d'un article**/
     public function getArticleCommentaires($Id_article)
     {
-        $stmt = $this->bdd->prepare('SELECT * FROM article WHERE IdArticleCommente = ?');
+        $stmt = $this->connexion->prepare('SELECT * FROM article WHERE IdArticleCommente = ?');
         $stmt->execute(array(
             $Id_article
         ));
@@ -96,7 +134,7 @@ class ArticleManager
     /** Suppression d'un article **/
     public function delete($id)
     {
-        $stmt = $this->bdd->prepare("DELETE FROM article WHERE Id_article = ?");
+        $stmt = $this->connexion->prepare("DELETE FROM article WHERE Id_article = ?");
         $stmt->execute(array(
             $id
         ));
@@ -105,7 +143,7 @@ class ArticleManager
     public function like()
     {
         //ON VA CHERCHER DANS LA BASE DE DONNEES SI LE COUPLE EXISTE DEJA
-        $stmt = $this->bdd->prepare('SELECT * FROM `like` WHERE Id_article = ? AND Id_user=?');
+        $stmt = $this->connexion->prepare('SELECT * FROM `like` WHERE Id_article = ? AND Id_user=?');
         $stmt->execute(array(
             $_POST["Id_article"],
             $_SESSION['user']['id'],
@@ -116,7 +154,7 @@ class ArticleManager
         //SI LE TABLEAU EST VIDE, cela veut dire que le couple n'existe pas
         //donc on va insérer
         if (count($tabLikes) == 0) {
-            $stmt = $this->bdd->prepare("INSERT INTO `like` (Id_article, Id_user) VALUES(?, ?) ");
+            $stmt = $this->connexion->prepare("INSERT INTO `like` (Id_article, Id_user) VALUES(?, ?) ");
             $stmt->execute(array(
                 $_POST["Id_article"],
                 $_SESSION['user']['id'],
@@ -130,7 +168,7 @@ class ArticleManager
     public function unLike()
     {
         //ON VA CHERCHER DANS LA BASE DE DONNEES SI LE COUPLE EXISTE DEJA
-        $stmt = $this->bdd->prepare('SELECT * FROM `like` WHERE Id_article = ? AND Id_user= ?');
+        $stmt = $this->connexion->prepare('SELECT * FROM `like` WHERE Id_article = ? AND Id_user= ?');
         $stmt->execute(array(
             $_POST["Id_article"],
             $_SESSION['user']['id'],
@@ -140,7 +178,7 @@ class ArticleManager
         //SI LE TABLEAU EST VIDE, cela veut dire que le couple n'existe pas
         //donc on va insérer
         if (count($tabLikes) == 0) {
-            $stmt = $this->bdd->prepare("INSERT INTO `like` (Id_article, Id_user) VALUES(?, ?) ");
+            $stmt = $this->connexion->prepare("INSERT INTO `like` (Id_article, Id_user) VALUES(?, ?) ");
             $stmt->execute(array(
                 $_POST["Id_article"],
                 $_SESSION['user']['id'],
@@ -153,7 +191,7 @@ class ArticleManager
     }
     public function update()
     {
-        $stmt = $this->bdd->prepare("UPDATE article SET Titre = ?, Photo = ?, Texte = ?, Id_user = ? Where Id_article = ? and IdArticleCommente is null");
+        $stmt = $this->connexion->prepare("UPDATE article SET Titre = ?, Photo = ?, Texte = ?, Id_user = ? Where Id_article = ? and IdArticleCommente is null");
         return $stmt->execute(array(
             $_POST["titre"],
             $_POST['photo'],
@@ -165,7 +203,7 @@ class ArticleManager
 
     public function getArticleByWords()
     {
-        $stmt = $this->bdd->prepare('SELECT * FROM article WHERE Titre LIKE ? and IdArticleCommente is null');
+        $stmt = $this->connexion->prepare('SELECT * FROM article WHERE Titre LIKE ? and IdArticleCommente is null');
         $stmt->execute(array(
             "%" . $_POST['recherche'] . "%"
         ));
@@ -175,7 +213,7 @@ class ArticleManager
     /** Récupération des articles à partir d'un id user*/
     public function getArticlesByUser($idUser)
     {
-        $stmt = $this->bdd->prepare('SELECT * FROM article WHERE Id_user = ?');
+        $stmt = $this->connexion->prepare('SELECT * FROM article WHERE Id_user = ?');
         $stmt->execute(array(
             $idUser
         ));

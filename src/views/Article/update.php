@@ -18,7 +18,7 @@ ob_start();
                         </p>
                         <textarea name="texte" rows="8" cols="40" placeholder="texte de l'article"><?php echo $article->getTexte();?></textarea>
                         <br>
-                        <p align="right"><button  type="submit">Mettre à jour l'article</button></p>
+                        <p align="right"><button  type="submit" id="postArticle">Mettre à jour l'article</button></p>
                     </form>
                 </div>
             </div>

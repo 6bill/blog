@@ -539,6 +539,10 @@ section.error {
     padding: 5px 15px;
     background-color: cornflowerblue;
 }
+#FormDelete{
+    width: 85%;
+    margin: auto;
+}
 #formDeleteEdit{
     display: flex;
 }
@@ -567,7 +571,7 @@ section.error a {
     width: 200px;
 }
 .logo{
-    width: 5% !important;
+    width: 6% !important;
 }
 @media screen and (max-width: 765px) {
     body {

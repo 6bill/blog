@@ -55,8 +55,8 @@ ob_start();
                                 <?php
                                 if (isset($_SESSION["user"])) {
                                     ?>
-                                        <input type="hidden" name="Id_article" value="<?php echo escape($article->getId_article()); ?>">
-                                        <button class="heart"></button>
+                                    <input type="hidden" name="Id_article" value="<?php echo escape($article->getId_article()); ?>">
+                                    <button class="heart"></button>
                                     <?php
                                 }
                                 ?>
@@ -87,8 +87,7 @@ ob_start();
                                 <h3>Poster un commentaire :</h3>
                                 <div id="flexComment" postid="<?php echo $article->getId_article();?>">
                                     <label for="texteCommentaire<?php echo $article->getId_article();?>"></label>
-                                    <input type="text" id="texteCommentaire<?php echo $article->getId_article();?>" placeholder="new comment" name="texte"
-                                           required>
+                                    <input type="text" id="texteCommentaire<?php echo $article->getId_article();?>" placeholder="new comment" name="texte" required>
                                     <input type="hidden" id="IdArticleCommente" name="IdArticleCommente" value="<?php echo escape($article->getId_article()); ?>" required>
                                     <label for="imageComment"></label>
                                     <button type="submit" class="postCommentaire">Envoyer</button>

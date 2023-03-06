@@ -36,7 +36,7 @@ ob_start();
                             <input type="hidden" id="hidden" name="IdArticle" value="<?php echo escape($article->getId_article()); ?>" required>
                             <input type="submit" id="submit" value="Publier l'article">
                         </form>
-                        <form action="/dashboard/<?php echo escape($article->getId_article()); ?>/delete" method="post" id="delete">
+                        <form action="/dashboard/<?php echo escape($article->getId_article()); ?>/delete" method="post" id="FormDelete">
                             <input type="hidden" id="hidden" name="IdArticle" value="<?php echo escape($article->getId_article()); ?>" required>
                             <input type="submit" id="submitDelete" value="Supprimer l'article">
                         </form>

@@ -1,5 +1,5 @@
 <?php
-//Dénitions de variables globales constantes
+//Définitions de variables globales constantes
 define("SRC", '../src/');
 define("CONTROLLERS", '../src/Controllers/');
 define("MODELS", '../src/Models/');
